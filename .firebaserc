@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "advent-calendar-b80d7": {
+      "hosting": {
+        "calendar": [
+          "advent-calendar-b80d7"
+        ]
+      }
+    }
+  }
+}
