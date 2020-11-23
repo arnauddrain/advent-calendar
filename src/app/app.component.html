@@ -1,32 +1,9 @@
 <mat-toolbar color="primary">
-  <span>Calendrier de l'avent</span>
+  <span>eCalendrier de l'avent</span>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
-
-<div *ngIf="isLoading">
-  Chargement...
+<div class="container">
+  <mat-card>
+    <router-outlet></router-outlet>
+  </mat-card>
 </div>
-
-<ng-container *ngIf="!isLoading">
-  <div *ngIf="user">
-    <h1>Hello {{ user.displayName }}!</h1>
-    <h1>Id: {{ user.uid }}</h1>
-    <h2>Mes calendriers :</h2>
-    <ul>
-      <li *ngFor="let calendar of calendars | async">
-        <input [(ngModel)]="calendar.value.name"> <button (click)="update(calendar)">Update</button>
-      </li>
-    </ul>
-    <div>
-      <input [(ngModel)]="newCalendarName">
-      <button (click)="addCalendar()">Ajouter un calendrier</button>
-    </div>
-    <button (click)="logout()">Logout</button>
-  </div>
-
-  <div *ngIf="!user">
-    <p>Please login.</p>
-    <button (click)="login()">Login with Google</button>
-  </div>
-</ng-container>

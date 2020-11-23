@@ -5,15 +5,25 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { CalendarsComponent } from './calendars/calendars.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CalendarsComponent,
+    CalendarComponent,
+    EditCalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +33,11 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

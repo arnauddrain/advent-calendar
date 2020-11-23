@@ -1,0 +1,31 @@
+<div *ngIf="isLoading">
+  Chargement...
+</div>
+
+<ng-container *ngIf="!isLoading">
+  <div *ngIf="user">
+    <h1>Bonjour {{ user.displayName }} !</h1>
+    <h2>Mes calendriers :</h2>
+    <ul>
+      <li *ngFor="let calendar of calendars | async">
+        <a [routerLink]="['edit', calendar.key]">{{ calendar.value.name }}</a>
+      </li>
+    </ul>
+    <div>
+      <mat-form-field class="example-form-field">
+        <mat-label>Nom</mat-label>
+        <input matInput type="text" [(ngModel)]="newCalendarName">
+      </mat-form-field>
+      <button mat-flat-button color="primary" (click)="addCalendar()">Ajouter un calendrier</button>
+    </div>
+    <button mat-flat-button color="warn" (click)="logout()">Déconnexion</button>
+  </div>
+
+  <div *ngIf="!user">
+    <p>Commencez par vous connecter :</p>
+    <button mat-flat-button (click)="login()">
+      <img src="assets/google.svg">
+      Connexion avec Google
+    </button>
+  </div>
+</ng-container>
