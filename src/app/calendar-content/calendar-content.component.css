@@ -1,0 +1,21 @@
+.calendar {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  background: purple;
+  border: 1px solid black;
+}
+
+.day {
+  height: 140px;
+  flex: 20%;
+}
+
+.mat-button-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.day-content {
+  margin: auto;
+}

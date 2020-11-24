@@ -1,0 +1,7 @@
+<div class="calendar">
+  <button class="day" *ngFor="let day of days; let i = index" mat-button (click)="click(i)">
+    <div class="day-content">
+      {{ i + 1 }}
+    </div>
+  </button>
+</div>

@@ -22,6 +22,9 @@ import { CalendarsComponent } from './calendars/calendars.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
+import { DayDialogComponent } from './day-dialog/day-dialog.component';
+import { CalendarContentComponent } from './calendar-content/calendar-content.component';
+import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
     CalendarComponent,
     EditCalendarComponent,
     BottomSheetComponent,
+    DayDialogComponent,
+    CalendarContentComponent,
+    DayEditDialogComponent
   ],
   imports: [
     BrowserModule,

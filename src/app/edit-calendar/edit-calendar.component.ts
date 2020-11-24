@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
+import { DayDialogComponent } from '../day-dialog/day-dialog.component';
+import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
 
 @Component({
   selector: 'app-edit-calendar',
@@ -17,7 +20,8 @@ export class EditCalendarComponent {
   constructor(
     public db: AngularFireDatabase,
     private route: ActivatedRoute,
-    private route: ActivatedRoute
+    private bottomSheet: MatBottomSheet,
+    private dialog: MatDialog
   ) {
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
     this.db.object('calendars/' + this.uid).valueChanges().subscribe(val => {
@@ -27,6 +31,18 @@ export class EditCalendarComponent {
 
   get url(): string {
     return window.location.origin + '/' + this.uid;
+  }
+
+  open(index: number) {
+    this.dialog.open(DayEditDialogComponent, {
+      data: {
+        text: this.calendar?.days?.[index]?.text
+      }
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.db.object('calendars/' + this.uid + '/days/' + index).set({ text: result });
+      }
+    });
   }
 
   share() {
