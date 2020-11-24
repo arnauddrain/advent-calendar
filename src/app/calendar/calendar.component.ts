@@ -14,7 +14,7 @@ export class CalendarComponent {
     public db: AngularFireDatabase,
     private route: ActivatedRoute
   ) {
-    const uuid = this.route.snapshot.paramMap.get('uuid');
+    const uuid = this.route.snapshot.paramMap.get('uid');
     this.db.object('calendars/' + uuid).valueChanges().subscribe(val => {
       this.calendar = val;
     });

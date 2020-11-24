@@ -1,3 +1,8 @@
 <p *ngIf="!calendar">Chargement...</p>
-<h1 *ngIf="calendar">{{ calendar.name }} <mat-icon>edit</mat-icon>
+<h1 *ngIf="calendar">
+  {{ calendar.name }}
+  <mat-icon>edit</mat-icon>
+  <button matTooltip="Partager" (click)="share()" mat-button class="right" [cdkCopyToClipboard]="url">
+    <mat-icon>link</mat-icon>
+  </button>
 </h1>

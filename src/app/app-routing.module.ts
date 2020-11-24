@@ -6,8 +6,8 @@ import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 
 const routes: Routes = [
   { path: '', component: CalendarsComponent },
-  { path: 'edit/:uuid', component: EditCalendarComponent },
-  { path: ':uuid', component: CalendarComponent },
+  { path: 'edit/:uid', component: EditCalendarComponent },
+  { path: ':uid', component: CalendarComponent },
 ];
 
 @NgModule({

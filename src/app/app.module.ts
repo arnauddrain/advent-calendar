@@ -8,7 +8,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,13 +21,15 @@ import { environment } from '../environments/environment';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
+import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarsComponent,
     CalendarComponent,
-    EditCalendarComponent
+    EditCalendarComponent,
+    BottomSheetComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +43,11 @@ import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule,
+    MatBottomSheetModule,
+    MatDialogModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
