@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
-import { DayDialogComponent } from '../day-dialog/day-dialog.component';
 import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
 
 @Component({

@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuillModule } from 'ngx-quill'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,7 +54,8 @@ import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.compon
     MatTooltipModule,
     MatBottomSheetModule,
     MatDialogModule,
-    ClipboardModule
+    ClipboardModule,
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
