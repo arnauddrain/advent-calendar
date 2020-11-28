@@ -2,20 +2,55 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  background: purple;
-  border: 1px solid black;
 }
 
 .day {
-  height: 140px;
+  height: 145px;
   flex: 20%;
 }
 
-.mat-button-wrapper {
+.day-content {
+  position: relative;
+  margin: auto;
+  width: 80%;
+  height: 80%;
   display: flex;
+}
+
+.day-content:hover {
+  transform: rotate(15deg);
+  transition: 300ms;
+  cursor: pointer;
+}
+
+img {
+  position: absolute;
+  left: 0;
+  top: 0;
   width: 100%;
 }
 
-.day-content {
-  margin: auto;
+.day-number {
+  z-index: 1;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 40px;
+  color: #3c3c3c;
+}
+
+@media(max-width: 768px) {
+  .day {
+    height: 140px;
+    flex: 25%;
+  }
+}
+
+@media(max-width: 500px) {
+  .day {
+    height: 140px;
+    flex: 50%;
+  }
 }
