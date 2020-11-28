@@ -1,4 +1,4 @@
 <mat-dialog-content>
-  <quill-editor [(ngModel)]="text"></quill-editor>
+  <quill-editor [(ngModel)]="text" [modules]="modules"></quill-editor>
   <button mat-button [mat-dialog-close]="text" cdkFocusInitial>Ok</button>
 </mat-dialog-content>
