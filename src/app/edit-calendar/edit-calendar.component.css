@@ -1,3 +1,7 @@
 .right {
   float: right;
 }
+
+mat-icon {
+  cursor: pointer;
+}

@@ -1,8 +1,11 @@
 <p *ngIf="!calendar">Chargement...</p>
 <ng-container *ngIf="calendar">
   <h1>
-    {{ calendar.name }}
-    <mat-icon>edit</mat-icon>
+    <span *ngIf="!editing">{{ calendar.name }}</span>
+    <mat-form-field *ngIf="editing">
+      <input matInput type="text" [(ngModel)]="calendar.name">
+    </mat-form-field>
+    <mat-icon (click)="edit()">edit</mat-icon>
     <button matTooltip="Partager" (click)="share()" mat-button class="right" [cdkCopyToClipboard]="url">
       <mat-icon>link</mat-icon>
     </button>

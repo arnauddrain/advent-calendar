@@ -15,6 +15,7 @@ import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.compo
 export class EditCalendarComponent {
   calendar: any = null;
   uid: string;
+  editing = false;
 
   constructor(
     public db: AngularFireDatabase,
@@ -50,5 +51,14 @@ export class EditCalendarComponent {
         text: 'Lien copié'
       }
     });
+  }
+
+  edit() {
+    if (this.editing) {
+      this.db.object('calendars/' + this.uid).set({
+        name: this.calendar.name
+      });
+    }
+    this.editing = !this.editing;
   }
 }
