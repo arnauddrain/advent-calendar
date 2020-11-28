@@ -55,9 +55,7 @@ export class EditCalendarComponent {
 
   edit() {
     if (this.editing) {
-      this.db.object('calendars/' + this.uid).set({
-        name: this.calendar.name
-      });
+      this.db.object('calendars/' + this.uid + '/name').set(this.calendar.name);
     }
     this.editing = !this.editing;
   }
