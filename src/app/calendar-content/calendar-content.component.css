@@ -5,7 +5,6 @@
 }
 
 .day {
-  height: 145px;
   flex: 20%;
 }
 
@@ -24,7 +23,6 @@
 }
 
 img {
-  position: absolute;
   left: 0;
   top: 0;
   width: 100%;
@@ -43,14 +41,19 @@ img {
 
 @media(max-width: 768px) {
   .day {
-    height: 140px;
-    flex: 25%;
+    flex: 33%;
+  }
+  .day-number {
+    top: 60%;
   }
 }
 
 @media(max-width: 500px) {
   .day {
-    height: 140px;
-    flex: 50%;
+    flex: 100%;
+  }
+  .day-number {
+    font-size: 50px;
+    top: 80%;
   }
 }
