@@ -1,3 +1,7 @@
+<mat-toolbar color="primary" *ngIf="!router.url.startsWith('/-')">
+  <a [routerLink]="'/'">eCalendrier de l'avent</a>
+</mat-toolbar>
+
 <div class="container">
   <mat-card>
     <router-outlet></router-outlet>
