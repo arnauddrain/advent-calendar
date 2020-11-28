@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,6 +45,7 @@ import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.compon
     FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAnalyticsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
@@ -57,6 +59,7 @@ import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.compon
     MatDialogModule,
     ClipboardModule,
     MatSlideToggleModule,
+
     QuillModule.forRoot()
   ],
   providers: [],
