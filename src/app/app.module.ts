@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill'
@@ -55,6 +56,7 @@ import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.compon
     MatBottomSheetModule,
     MatDialogModule,
     ClipboardModule,
+    MatSlideToggleModule,
     QuillModule.forRoot()
   ],
   providers: [],
