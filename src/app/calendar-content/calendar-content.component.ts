@@ -25,7 +25,6 @@ export class CalendarContentComponent {
 
   isAvailable(index: number) {
     const now = new Date();
-    console.log(now, now.getFullYear(), now.getMonth(), now.getDate(), index);
     return (this.editing || now.getFullYear() > 2020 || (now.getFullYear() === 2020 && now.getMonth() >= 11 && now.getDate() > index));
   }
 }
