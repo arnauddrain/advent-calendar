@@ -2,7 +2,7 @@
   <i>Vous pouvez redimensionner les images en cliquant dessus.</i>
   <quill-editor [(ngModel)]="text" [modules]="modules"></quill-editor>
   <button mat-button (click)="save()" cdkFocusInitial>Ok</button>
-  <p class="error" *ngIf="text?.length >= 1000000">
+  <p class="error" *ngIf="text && text.length >= 1000000">
     Chaque jour est limité à 1Mo de données, essayez de réduire la taille de vos images.
   </p>
 </mat-dialog-content>
