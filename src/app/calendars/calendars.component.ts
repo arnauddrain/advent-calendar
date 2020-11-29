@@ -13,7 +13,6 @@ import { map } from 'rxjs/operators';
 export class CalendarsComponent {
 
   isLoading = true;
-  calendarsRef: AngularFireList<any>;
   newCalendarName: string = '';
   calendars: Observable<any[]> | null;
   user: firebase.User | null = null;
@@ -23,7 +22,6 @@ export class CalendarsComponent {
     public db: AngularFireDatabase
   ) {
     this.calendars = null;
-    this.calendarsRef = this.db.list('calendars');
     auth.user.subscribe((user) => {
       this.isLoading = false;
       this.user = user;
