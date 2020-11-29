@@ -6,6 +6,7 @@
   <div *ngIf="user">
     <h1>Bonjour {{ user.displayName }} !</h1>
     <h2>Mes calendriers :</h2>
+    <i *ngIf="calendars === null">Chargement des calendriers...</i>
     <ul>
       <li *ngFor="let calendar of calendars | async">
         <a [routerLink]="['edit', calendar.key]">{{ calendar.value.name }}</a>
