@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-content',
@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class CalendarContentComponent {
   @Output() open = new EventEmitter<number>();
+  @Input() editing: boolean = false;
 
   constructor() { }
 
@@ -17,6 +18,14 @@ export class CalendarContentComponent {
   }
 
   click(index: number) {
-    this.open.emit(index);
+    if (this.isAvailable(index)) {
+      this.open.emit(index);
+    }
+  }
+
+  isAvailable(index: number) {
+    const now = new Date();
+    console.log(now, now.getFullYear(), now.getMonth(), now.getDate(), index);
+    return (this.editing || now.getFullYear() > 2020 || (now.getFullYear() === 2020 && now.getMonth() >= 11 && now.getDate() > index));
   }
 }

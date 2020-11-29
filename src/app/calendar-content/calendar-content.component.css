@@ -6,6 +6,11 @@
 
 .day {
   flex: 20%;
+  filter: grayscale(0.9);
+}
+
+.day.enabled {
+  filter: none;
 }
 
 .day-content {
@@ -16,7 +21,7 @@
   display: flex;
 }
 
-.day-content:hover {
+.day.enabled .day-content:hover {
   transform: rotate(15deg);
   transition: 300ms;
   cursor: pointer;

@@ -10,6 +10,6 @@
       <mat-icon>link</mat-icon>
     </button>
   </h1>
-  <app-calendar-content (open)="open($event)"></app-calendar-content>
+  <app-calendar-content (open)="open($event)" [editing]="true"></app-calendar-content>
   Voir la version utilisateur : <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle>
 </ng-container>
