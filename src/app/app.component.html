@@ -6,4 +6,7 @@
   <mat-card>
     <router-outlet></router-outlet>
   </mat-card>
+  <div class="create-button" *ngIf="router.url.startsWith('/-')">
+    <a mat-flat-button color="primary" [routerLink]="'/'">Créer mon propre calendrier</a>
+  </div>
 </div>

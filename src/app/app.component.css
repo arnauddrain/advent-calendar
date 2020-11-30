@@ -5,10 +5,16 @@ mat-card {
 .container {
   max-width: 768px;
   margin: auto;
-  margin-top: 30px;
+  padding-top: 30px;
 }
 
-a {
+mat-toolbar a {
   color: white;
   text-decoration: none;
+}
+
+.create-button {
+  margin-top: 30px;
+  text-align: center;
+  margin-bottom: 10px;
 }
