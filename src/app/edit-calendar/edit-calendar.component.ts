@@ -48,7 +48,8 @@ export class EditCalendarComponent {
   share() {
     this.bottomSheet.open(BottomSheetComponent, {
       data: {
-        text: 'Lien copié'
+        text: 'Le lien a été copié dans le presse-papier !',
+        link: this.url
       }
     });
   }
