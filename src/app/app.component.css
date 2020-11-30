@@ -1,3 +1,7 @@
+.flex-spacer {
+  flex-grow: 1;
+}
+
 mat-card {
   background: #a7c5cc;
 }
