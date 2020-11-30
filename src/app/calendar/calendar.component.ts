@@ -11,6 +11,7 @@ import { DayDialogComponent } from '../day-dialog/day-dialog.component';
 })
 export class CalendarComponent {
   calendar: any = null;
+  demo = false;
 
   constructor(
     public db: AngularFireDatabase,
@@ -18,8 +19,9 @@ export class CalendarComponent {
     private dialog: MatDialog
   ) {
     const uuid = this.route.snapshot.paramMap.get('uid');
-    this.db.object('calendars/' + uuid).valueChanges().subscribe(val => {
+    this.db.object('calendars/' + uuid).valueChanges().subscribe((val: any) => {
       this.calendar = val;
+      this.demo = val?.demo ?? false;
     });
   }
 

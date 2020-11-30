@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CalendarContentComponent {
   @Output() open = new EventEmitter<number>();
   @Input() editing: boolean = false;
+  @Input() demo: boolean = false;
 
   constructor() { }
 
@@ -25,6 +26,9 @@ export class CalendarContentComponent {
 
   isAvailable(index: number) {
     const now = new Date();
+    if (this.demo) {
+      now.setDate(now.getDate() + 3);
+    }
     return (this.editing || now.getFullYear() > 2020 || (now.getFullYear() === 2020 && now.getMonth() >= 11 && now.getDate() > index));
   }
 }

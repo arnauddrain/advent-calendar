@@ -3,5 +3,8 @@
   <h1>
     {{ calendar.name }}
   </h1>
-  <app-calendar-content (open)="open($event)"></app-calendar-content>
+  <p *ngIf="demo">
+    <i>La démo montre l'état d'un calendrier 3 jours dans le futur.</i>
+  </p>
+  <app-calendar-content (open)="open($event)" [demo]="demo"></app-calendar-content>
 </ng-container>
