@@ -14,3 +14,8 @@
 :host ::ng-deep .preview img {
   max-width: 100% !important;
 }
+
+:host mat-dialog-content::ng-deep .ql-tooltip {
+  left: 0 !important;
+  top: 0 !important;
+}
