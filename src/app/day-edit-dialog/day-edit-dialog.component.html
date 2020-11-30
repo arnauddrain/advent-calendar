@@ -1,7 +1,13 @@
 <mat-dialog-content>
-  <i>Vous pouvez redimensionner les images en cliquant dessus.</i>
-  <quill-editor [(ngModel)]="text" [modules]="modules"></quill-editor>
-  <button mat-button (click)="save()" cdkFocusInitial>Ok</button>
+  <div class="header">
+    Prévisualiser: <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle>
+  </div>
+  <quill-editor [(ngModel)]="text" [modules]="modules" *ngIf="!preview"></quill-editor>
+  <div class="ql-editor preview" [innerHTML]="text" *ngIf="preview"></div>
+  <p>
+    <button mat-button (click)="save()" cdkFocusInitial>Ok</button>
+  </p>
+  <p><i *ngIf="!preview">Vous pouvez redimensionner les images en cliquant dessus.</i></p>
   <p class="error" *ngIf="text && text.length >= 1000000">
     Chaque jour est limité à 1Mo de données, essayez de réduire la taille de vos images.
   </p>

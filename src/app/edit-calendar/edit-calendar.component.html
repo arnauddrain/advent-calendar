@@ -7,9 +7,8 @@
     </mat-form-field>
     <mat-icon (click)="edit()">edit</mat-icon>
     <button matTooltip="Partager" (click)="share()" mat-button class="right" [cdkCopyToClipboard]="url">
-      Partager <mat-icon>link</mat-icon>
+      Partager avec les jours bloqués : <mat-icon>link</mat-icon>
     </button>
   </h1>
   <app-calendar-content (open)="open($event)" [editing]="true"></app-calendar-content>
-  Voir la version utilisateur : <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle>
 </ng-container>

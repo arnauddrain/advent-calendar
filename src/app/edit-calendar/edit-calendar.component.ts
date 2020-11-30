@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
-import { DayDialogComponent } from '../day-dialog/day-dialog.component';
 import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
 
 @Component({
@@ -17,7 +16,6 @@ export class EditCalendarComponent {
   calendar: any = null;
   uid: string;
   editing = false;
-  preview = false;
 
   constructor(
     public db: AngularFireDatabase,
@@ -36,23 +34,15 @@ export class EditCalendarComponent {
   }
 
   open(index: number) {
-    if (this.preview) {
-      this.dialog.open(DayDialogComponent, {
-        data: {
-          text: this.calendar?.days?.[index]?.text
-        }
-      });
-    } else {
-      this.dialog.open(DayEditDialogComponent, {
-        data: {
-          text: this.calendar?.days?.[index]?.text
-        }
-      }).afterClosed().subscribe((result) => {
-        if (result) {
-          this.db.object('calendars/' + this.uid + '/days/' + index).set({ text: result });
-        }
-      });
-    }
+    this.dialog.open(DayEditDialogComponent, {
+      data: {
+        text: this.calendar?.days?.[index]?.text
+      }
+    }).afterClosed().subscribe((result) => {
+      if (result) {
+        this.db.object('calendars/' + this.uid + '/days/' + index).set({ text: result });
+      }
+    });
   }
 
   share() {

@@ -16,6 +16,7 @@ export class DayEditDialogComponent {
   modules = {
     imageResize: {}
   };
+  preview: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DayEditDialogComponent>,
