@@ -19,11 +19,11 @@
   width: 80%;
   height: 80%;
   display: flex;
+  transition: 300ms;
 }
 
 .day.enabled .day-content:hover {
   transform: rotate(15deg);
-  transition: 300ms;
   cursor: pointer;
 }
 
