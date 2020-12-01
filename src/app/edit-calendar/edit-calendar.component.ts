@@ -3,9 +3,12 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
+import { FileService } from '../file.service';
 
 @Component({
   selector: 'app-edit-calendar',
@@ -21,7 +24,8 @@ export class EditCalendarComponent {
     public db: AngularFireDatabase,
     private route: ActivatedRoute,
     private bottomSheet: MatBottomSheet,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private fileService: FileService
   ) {
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
     this.db.object('calendars/' + this.uid).valueChanges().subscribe(val => {
@@ -33,15 +37,21 @@ export class EditCalendarComponent {
     return window.location.origin + '/' + this.uid;
   }
 
-  open(index: number) {
-    this.dialog.open(DayEditDialogComponent, {
-      data: {
-        text: this.calendar?.days?.[index]?.text
-      }
-    }).afterClosed().subscribe((result) => {
-      if (result) {
-        this.db.object('calendars/' + this.uid + '/days/' + index).set({ text: result });
-      }
+  async open(index: number) {
+    const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
+    this.fileService.get(filename).pipe(take(1), catchError(() => of(''))).subscribe(content => {
+      this.dialog.open(DayEditDialogComponent, {
+        data: {
+          //text: content
+          text: this.calendar?.days?.[index]?.text
+        }
+      }).afterClosed().subscribe((result) => {
+        if (result) {
+          this.fileService.upload(filename, result);
+          // to remove
+          this.db.object('calendars/' + this.uid + '/days/' + index).set({ text: result });
+        }
+      });
     });
   }
 

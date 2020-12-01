@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -28,6 +29,7 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { DayDialogComponent } from './day-dialog/day-dialog.component';
 import { CalendarContentComponent } from './calendar-content/calendar-content.component';
 import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.compon
     AngularFireAnalyticsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatCardModule,
@@ -59,7 +62,7 @@ import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.compon
     MatDialogModule,
     ClipboardModule,
     MatSlideToggleModule,
-
+    HttpClientModule,
     QuillModule.forRoot()
   ],
   providers: [],

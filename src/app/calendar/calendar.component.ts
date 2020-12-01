@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
+
 import { DayDialogComponent } from '../day-dialog/day-dialog.component';
+import { FileService } from '../file.service';
 
 @Component({
   selector: 'app-calendar',
@@ -11,25 +15,31 @@ import { DayDialogComponent } from '../day-dialog/day-dialog.component';
 })
 export class CalendarComponent {
   calendar: any = null;
+  uid: string;
   demo = false;
 
   constructor(
     public db: AngularFireDatabase,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private fileService: FileService
   ) {
-    const uuid = this.route.snapshot.paramMap.get('uid');
-    this.db.object('calendars/' + uuid).valueChanges().subscribe((val: any) => {
+    this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
+    this.db.object('calendars/' + this.uid).valueChanges().subscribe((val: any) => {
       this.calendar = val;
       this.demo = val?.demo ?? false;
     });
   }
 
   open(index: number) {
-    this.dialog.open(DayDialogComponent, {
-      data: {
-        text: this.calendar?.days?.[index]?.text
-      }
-    })
+    const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
+    this.fileService.get(filename).pipe(take(1), catchError(() => of(''))).subscribe(content => {
+      this.dialog.open(DayDialogComponent, {
+        data: {
+          //text: content
+          text: this.calendar?.days?.[index]?.text
+        }
+      })
+    });
   }
 }
