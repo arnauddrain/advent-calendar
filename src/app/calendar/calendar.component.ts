@@ -36,8 +36,7 @@ export class CalendarComponent {
     this.fileService.get(filename).pipe(take(1), catchError(() => of(''))).subscribe(content => {
       this.dialog.open(DayDialogComponent, {
         data: {
-          //text: content
-          text: this.calendar?.days?.[index]?.text
+          text: content
         }
       })
     });

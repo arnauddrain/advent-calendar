@@ -42,14 +42,11 @@ export class EditCalendarComponent {
     this.fileService.get(filename).pipe(take(1), catchError(() => of(''))).subscribe(content => {
       this.dialog.open(DayEditDialogComponent, {
         data: {
-          //text: content
-          text: this.calendar?.days?.[index]?.text
+          text: content
         }
       }).afterClosed().subscribe((result) => {
         if (result) {
           this.fileService.upload(filename, result);
-          // to remove
-          this.db.object('calendars/' + this.uid + '/days/' + index).set({ text: result });
         }
       });
     });
