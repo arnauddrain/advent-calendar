@@ -8,7 +8,7 @@
     <button mat-flat-button color="primary" (click)="save()">Ok</button>
   </p>
   <p><i *ngIf="!preview">Vous pouvez redimensionner les images en cliquant dessus.</i></p>
-  <p class="error" *ngIf="text && text.length >= 1000000">
-    Chaque jour est limité à 1Mo de données, essayez de réduire la taille de vos images.
+  <p class="error" *ngIf="text && text.length >= 2000000">
+    Chaque jour est limité à 2Mo de données, essayez de réduire la taille de vos images.
   </p>
 </mat-dialog-content>

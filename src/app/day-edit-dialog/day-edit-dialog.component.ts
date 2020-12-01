@@ -26,7 +26,7 @@ export class DayEditDialogComponent {
   }
 
   save() {
-    if (this.text.length >= 1000000) {
+    if (this.text.length >= 2000000) {
       return;
     }
     this.dialogRef.close(this.text);
