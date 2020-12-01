@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,7 +26,8 @@ export class EditCalendarComponent {
     private route: ActivatedRoute,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
-    private fileService: FileService
+    private fileService: FileService,
+    private analytics: AngularFireAnalytics
   ) {
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
     this.db.object('calendars/' + this.uid).valueChanges().subscribe(val => {
@@ -38,6 +40,7 @@ export class EditCalendarComponent {
   }
 
   async open(index: number) {
+    this.analytics.logEvent('Open day');
     const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
     this.fileService.get(filename).pipe(take(1), catchError(() => of(''))).subscribe(content => {
       this.dialog.open(DayEditDialogComponent, {
@@ -46,6 +49,7 @@ export class EditCalendarComponent {
         }
       }).afterClosed().subscribe((result) => {
         if (result) {
+          this.analytics.logEvent('Save day');
           this.fileService.upload(filename, result);
         }
       });
@@ -53,6 +57,7 @@ export class EditCalendarComponent {
   }
 
   share() {
+    this.analytics.logEvent('Share');
     this.bottomSheet.open(BottomSheetComponent, {
       data: {
         text: 'Le lien a été copié dans le presse-papier !',
@@ -63,6 +68,7 @@ export class EditCalendarComponent {
 
   edit() {
     if (this.editing) {
+      this.analytics.logEvent('Edit calendar name');
       this.db.object('calendars/' + this.uid + '/name').set(this.calendar.name);
     }
     this.editing = !this.editing;

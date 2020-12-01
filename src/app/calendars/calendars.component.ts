@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,7 +20,8 @@ export class CalendarsComponent {
 
   constructor(
     public auth: AngularFireAuth,
-    public db: AngularFireDatabase
+    public db: AngularFireDatabase,
+    private analytics: AngularFireAnalytics
   ) {
     this.calendars = null;
     auth.user.subscribe((user) => {
@@ -37,6 +39,7 @@ export class CalendarsComponent {
 
   addCalendar() {
     if (this.user) {
+      this.analytics.logEvent('Create calendar');
       this.db.list('/calendars').push({
         name: this.newCalendarName,
         author: this.user.uid
@@ -45,10 +48,12 @@ export class CalendarsComponent {
   }
 
   login() {
+    this.analytics.logEvent('Login');
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   logout() {
+    this.analytics.logEvent('Logout');
     this.auth.signOut();
   }
 }

@@ -11,7 +11,8 @@ export const environment = {
     projectId: 'advent-calendar-dev',
     storageBucket: 'advent-calendar-dev.appspot.com',
     messagingSenderId: '317779781951',
-    appId: '1:317779781951:web:2c4f4c0e5b9ea8ebc34b8a'
+    appId: '1:317779781951:web:2c4f4c0e5b9ea8ebc34b8a',
+    measurementId: 'G-H1LCVLWWPC'
   }
 };
 
