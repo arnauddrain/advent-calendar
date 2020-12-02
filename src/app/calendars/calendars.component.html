@@ -22,11 +22,12 @@
   </div>
 
   <div *ngIf="!user">
-    <p>Commencez par vous connecter :</p>
+    <h2>Commencez par vous connecter pour créer votre calendrier :</h2>
     <button mat-flat-button (click)="login()">
       <img src="assets/google.svg">
       Connexion avec Google
     </button>
-    <p>Ou par regarder la <a [routerLink]="['-MMm0AnXznQF1ZTaetrC']">démo</a>.</p>
+    <h2>Ou</h2>
+    <p><a mat-flat-button color="primary" [routerLink]="['-MMm0AnXznQF1ZTaetrC']">Regarder la démo</a></p>
   </div>
 </ng-container>
