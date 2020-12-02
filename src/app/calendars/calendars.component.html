@@ -13,10 +13,11 @@
     </ul>
     <div>
       <mat-form-field>
-        <mat-label>Nom</mat-label>
+        <mat-label>Nom du calendrier</mat-label>
         <input matInput type="text" [(ngModel)]="newCalendarName">
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="addCalendar()" [disabled]="addingCalendar">
+      <button mat-flat-button color="primary" (click)="addCalendar()"
+        [disabled]="addingCalendar || !newCalendarName.length">
         Ajouter un calendrier
       </button>
     </div>
