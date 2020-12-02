@@ -15,6 +15,7 @@ mat-card {
 mat-toolbar a {
   color: white;
   text-decoration: none;
+  min-width: 50px;
 }
 
 .create-button {
