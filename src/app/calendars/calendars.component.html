@@ -25,10 +25,18 @@
 
   <div *ngIf="!user">
     <h2>Commencez par vous connecter pour créer votre calendrier :</h2>
-    <button mat-flat-button (click)="login()">
-      <img src="assets/google.svg">
-      Connexion avec Google
-    </button>
+    <p>
+      <button mat-flat-button (click)="login()">
+        <img src="assets/google.svg">
+        Connexion avec Google
+      </button>
+    </p>
+    <p>
+      <button mat-flat-button (click)="fbLogin()">
+        <mat-icon>facebook</mat-icon>
+        Connexion avec Facebook
+      </button>
+    </p>
     <h2>Ou</h2>
     <p><a mat-flat-button color="primary" [routerLink]="['-MMm0AnXznQF1ZTaetrC']">Regarder la démo</a></p>
   </div>

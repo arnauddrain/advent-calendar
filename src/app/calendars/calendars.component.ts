@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 
 @Component({
   selector: 'app-calendars',
@@ -21,6 +23,7 @@ export class CalendarsComponent {
   constructor(
     public auth: AngularFireAuth,
     public db: AngularFireDatabase,
+    private bottomSheet: MatBottomSheet,
     private analytics: AngularFireAnalytics
   ) {
     this.calendars = null;
@@ -52,7 +55,24 @@ export class CalendarsComponent {
 
   login() {
     this.analytics.logEvent('Login');
+    this.analytics.logEvent('Login via Google');
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  fbLogin() {
+    this.analytics.logEvent('Login');
+    this.analytics.logEvent('Login via Facebook');
+    this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).catch((e) => {
+      if (e.code === 'auth/account-exists-with-different-credential') {
+        this.analytics.logEvent('Error with login via Facebook');
+        this.bottomSheet.open(BottomSheetComponent, {
+          data: {
+            text: 'Cet email est déjà associé à un autre compte, essayez de vous connecter avec Google'
+          }
+        });
+      }
+      console.log(e);
+    });
   }
 
   logout() {
