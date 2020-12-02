@@ -15,7 +15,7 @@ export class DayDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { text: string },
     private sanitizer: DomSanitizer
   ) {
-    this.text = this.sanitizer.bypassSecurityTrustHtml(data.text ?? '<i>Le père noël n\'est pas encore passé par là...');
+    this.text = this.sanitizer.bypassSecurityTrustHtml(data.text || '<i>Le père noël n\'est pas encore passé par là...');
   }
 
 }
