@@ -16,7 +16,9 @@
         <mat-label>Nom</mat-label>
         <input matInput type="text" [(ngModel)]="newCalendarName">
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="addCalendar()">Ajouter un calendrier</button>
+      <button mat-flat-button color="primary" (click)="addCalendar()" [disabled]="addingCalendar">
+        Ajouter un calendrier
+      </button>
     </div>
     <button mat-flat-button color="warn" (click)="logout()">Déconnexion</button>
   </div>

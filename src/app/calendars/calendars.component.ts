@@ -12,11 +12,11 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./calendars.component.css']
 })
 export class CalendarsComponent {
-
   isLoading = true;
   newCalendarName: string = '';
   calendars: Observable<any[]> | null;
   user: firebase.User | null = null;
+  addingCalendar = false;
 
   constructor(
     public auth: AngularFireAuth,
@@ -37,13 +37,16 @@ export class CalendarsComponent {
     });
   }
 
-  addCalendar() {
-    if (this.user) {
+  async addCalendar() {
+    if (this.user && !this.addingCalendar) {
       this.analytics.logEvent('Create calendar');
-      this.db.list('/calendars').push({
+      this.addingCalendar = true;
+      await this.db.list('/calendars').push({
         name: this.newCalendarName,
         author: this.user.uid
       });
+      this.newCalendarName = '';
+      this.addingCalendar = false;
     }
   }
 
