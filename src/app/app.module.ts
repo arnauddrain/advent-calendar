@@ -30,6 +30,7 @@ import { DayDialogComponent } from './day-dialog/day-dialog.component';
 import { CalendarContentComponent } from './calendar-content/calendar-content.component';
 import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-calendar-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     BottomSheetComponent,
     DayDialogComponent,
     CalendarContentComponent,
-    DayEditDialogComponent
+    DayEditDialogComponent,
+    DeleteCalendarDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -3,12 +3,13 @@ import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
+import { DeleteCalendarDialogComponent } from '../delete-calendar-dialog/delete-calendar-dialog.component';
 import { FileService } from '../file.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class EditCalendarComponent implements OnInit {
   constructor(
     public db: AngularFireDatabase,
     private route: ActivatedRoute,
+    private router: Router,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
     private fileService: FileService,
@@ -76,5 +78,20 @@ export class EditCalendarComponent implements OnInit {
       this.db.object('calendars/' + this.uid + '/name').set(this.calendar.name);
     }
     this.editing = !this.editing;
+  }
+
+  deleteCalendar() {
+    this.analytics.logEvent('Delete calendar');
+    this.dialog.open(DeleteCalendarDialogComponent, {}).afterClosed().subscribe(async (result) => {
+      if (result) {
+        await this.db.object('calendars/' + this.uid).remove();
+        this.bottomSheet.open(BottomSheetComponent, {
+          data: {
+            text: `Le calendrier a bien été supprimé. En cas d'erreur vous pouvez joindre l'administrateur via la page Facebook (lien en haut à droite)`
+          }
+        });
+        this.router.navigate(['']);
+      }
+    });
   }
 }

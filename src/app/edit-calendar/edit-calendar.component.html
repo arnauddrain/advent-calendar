@@ -11,4 +11,7 @@
     </button>
   </h1>
   <app-calendar-content (open)="open($event)" [editing]="true"></app-calendar-content>
+  <p>
+    <button mat-flat-button color="warn" (click)="deleteCalendar()">Supprimer le calendrier</button>
+  </p>
 </ng-container>
