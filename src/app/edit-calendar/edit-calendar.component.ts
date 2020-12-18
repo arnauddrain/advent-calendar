@@ -29,6 +29,7 @@ export class EditCalendarComponent {
     private fileService: FileService,
     private analytics: AngularFireAnalytics
   ) {
+    this.analytics.logEvent('Edit calendar');
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
     this.db.object('calendars/' + this.uid).valueChanges().subscribe(val => {
       this.calendar = val;
