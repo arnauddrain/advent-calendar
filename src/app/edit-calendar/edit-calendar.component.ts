@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/analytics';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
@@ -16,7 +16,7 @@ import { FileService } from '../file.service';
   templateUrl: './edit-calendar.component.html',
   styleUrls: ['./edit-calendar.component.css']
 })
-export class EditCalendarComponent {
+export class EditCalendarComponent implements OnInit {
   calendar: any = null;
   uid: string;
   editing = false;
@@ -29,11 +29,14 @@ export class EditCalendarComponent {
     private fileService: FileService,
     private analytics: AngularFireAnalytics
   ) {
-    this.analytics.logEvent('Edit calendar');
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
     this.db.object('calendars/' + this.uid).valueChanges().subscribe(val => {
       this.calendar = val;
     });
+  }
+
+  ngOnInit() {
+    this.analytics.logEvent('Edit calendar');
   }
 
   get url(): string {
