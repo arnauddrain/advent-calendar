@@ -25,4 +25,8 @@ export class AppComponent {
   event() {
     this.analytics.logEvent('Click on donation');
   }
+
+  eventUser() {
+    this.analytics.logEvent('Click on donation user');
+  }
 }
