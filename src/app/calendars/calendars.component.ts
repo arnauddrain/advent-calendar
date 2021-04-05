@@ -30,13 +30,10 @@ export class CalendarsComponent {
     auth.user.subscribe((user) => {
       this.isLoading = false;
       this.user = user;
-      this.calendars = this.db.list('/calendars', ref =>
-        ref.orderByChild('author').equalTo(this.user?.uid ?? '')
-      ).snapshotChanges().pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, value: c.payload.val() }))
-        )
-      );
+      this.calendars = this.db
+        .list('/calendars', (ref) => ref.orderByChild('author').equalTo(this.user?.uid ?? ''))
+        .snapshotChanges()
+        .pipe(map((changes) => changes.map((c) => ({ key: c.payload.key, value: c.payload.val() }))));
     });
   }
 

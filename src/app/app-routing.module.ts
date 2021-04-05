@@ -9,11 +9,11 @@ import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 const routes: Routes = [
   { path: '', component: CalendarsComponent },
   { path: 'edit/:uid', component: EditCalendarComponent, canActivate: [AngularFireAuthGuard] },
-  { path: ':uid', component: CalendarComponent },
+  { path: ':uid', component: CalendarComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

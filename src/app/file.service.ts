@@ -8,17 +8,19 @@ import { mergeMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FileService {
-  constructor(
-    private storage: AngularFireStorage,
-    private http: HttpClient
-  ) { }
+  constructor(private storage: AngularFireStorage, private http: HttpClient) {}
 
   get(filename: string): Observable<any> {
-    return this.storage.ref(filename).getDownloadURL().pipe(
-      mergeMap(url => this.http.get(url, {
-        responseType: 'text'
-      }))
-    )
+    return this.storage
+      .ref(filename)
+      .getDownloadURL()
+      .pipe(
+        mergeMap((url) =>
+          this.http.get(url, {
+            responseType: 'text'
+          })
+        )
+      );
   }
 
   async upload(filename: string, data: string): Promise<void> {

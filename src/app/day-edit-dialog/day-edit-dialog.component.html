@@ -1,7 +1,5 @@
 <mat-dialog-content>
-  <div class="header">
-    Prévisualiser: <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle>
-  </div>
+  <div class="header">Prévisualiser: <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle></div>
   <quill-editor [(ngModel)]="text" [modules]="modules" *ngIf="!preview"></quill-editor>
   <div class="ql-editor preview" [innerHTML]="text" *ngIf="preview"></div>
   <p>

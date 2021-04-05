@@ -10,7 +10,7 @@ export class CalendarContentComponent {
   @Input() editing: boolean = false;
   @Input() demo: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
   get days(): string[] {
     return Array(25).map(() => {
@@ -29,6 +29,6 @@ export class CalendarContentComponent {
     if (this.demo) {
       now.setDate(now.getDate() + 3);
     }
-    return (this.editing || now.getFullYear() > 2020 || (now.getFullYear() === 2020 && now.getMonth() >= 11 && now.getDate() > index));
+    return this.editing || now.getFullYear() > 2020 || (now.getFullYear() === 2020 && now.getMonth() >= 11 && now.getDate() > index);
   }
 }

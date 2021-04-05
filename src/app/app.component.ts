@@ -12,11 +12,7 @@ import firebase from 'firebase/app';
 export class AppComponent {
   user: firebase.User | null = null;
 
-  constructor(
-    public router: Router,
-    private analytics: AngularFireAnalytics,
-    public auth: AngularFireAuth
-  ) {
+  constructor(public router: Router, private analytics: AngularFireAnalytics, public auth: AngularFireAuth) {
     auth.user.subscribe((user) => {
       this.user = user;
     });

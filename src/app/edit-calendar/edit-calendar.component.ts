@@ -32,9 +32,12 @@ export class EditCalendarComponent implements OnInit {
     private analytics: AngularFireAnalytics
   ) {
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
-    this.db.object('calendars/' + this.uid).valueChanges().subscribe(val => {
-      this.calendar = val;
-    });
+    this.db
+      .object('calendars/' + this.uid)
+      .valueChanges()
+      .subscribe((val) => {
+        this.calendar = val;
+      });
   }
 
   ngOnInit() {
@@ -48,18 +51,27 @@ export class EditCalendarComponent implements OnInit {
   async open(index: number) {
     this.analytics.logEvent('Open day');
     const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
-    this.fileService.get(filename).pipe(take(1), catchError(() => of(''))).subscribe(content => {
-      this.dialog.open(DayEditDialogComponent, {
-        data: {
-          text: content
-        }
-      }).afterClosed().subscribe((result) => {
-        if (result) {
-          this.analytics.logEvent('Save day');
-          this.fileService.upload(filename, result);
-        }
+    this.fileService
+      .get(filename)
+      .pipe(
+        take(1),
+        catchError(() => of(''))
+      )
+      .subscribe((content) => {
+        this.dialog
+          .open(DayEditDialogComponent, {
+            data: {
+              text: content
+            }
+          })
+          .afterClosed()
+          .subscribe((result) => {
+            if (result) {
+              this.analytics.logEvent('Save day');
+              this.fileService.upload(filename, result);
+            }
+          });
       });
-    });
   }
 
   share() {
@@ -82,16 +94,19 @@ export class EditCalendarComponent implements OnInit {
 
   deleteCalendar() {
     this.analytics.logEvent('Delete calendar');
-    this.dialog.open(DeleteCalendarDialogComponent, {}).afterClosed().subscribe(async (result) => {
-      if (result) {
-        await this.db.object('calendars/' + this.uid).remove();
-        this.bottomSheet.open(BottomSheetComponent, {
-          data: {
-            text: `Le calendrier a bien été supprimé. En cas d'erreur vous pouvez joindre l'administrateur via la page Facebook (lien en haut à droite)`
-          }
-        });
-        this.router.navigate(['']);
-      }
-    });
+    this.dialog
+      .open(DeleteCalendarDialogComponent, {})
+      .afterClosed()
+      .subscribe(async (result) => {
+        if (result) {
+          await this.db.object('calendars/' + this.uid).remove();
+          this.bottomSheet.open(BottomSheetComponent, {
+            data: {
+              text: `Le calendrier a bien été supprimé. En cas d'erreur vous pouvez joindre l'administrateur via la page Facebook (lien en haut à droite)`
+            }
+          });
+          this.router.navigate(['']);
+        }
+      });
   }
 }

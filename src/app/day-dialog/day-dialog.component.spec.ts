@@ -8,9 +8,8 @@ describe('DayDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DayDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [DayDialogComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

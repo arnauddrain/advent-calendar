@@ -17,7 +17,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -67,10 +67,7 @@ import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-c
     HttpClientModule,
     QuillModule.forRoot()
   ],
-  providers: [
-    ScreenTrackingService,
-    UserTrackingService
-  ],
+  providers: [ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

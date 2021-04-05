@@ -18,27 +18,31 @@ export class CalendarComponent {
   uid: string;
   demo = false;
 
-  constructor(
-    public db: AngularFireDatabase,
-    private route: ActivatedRoute,
-    private dialog: MatDialog,
-    private fileService: FileService
-  ) {
+  constructor(public db: AngularFireDatabase, private route: ActivatedRoute, private dialog: MatDialog, private fileService: FileService) {
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
-    this.db.object('calendars/' + this.uid).valueChanges().subscribe((val: any) => {
-      this.calendar = val;
-      this.demo = val?.demo ?? false;
-    });
+    this.db
+      .object('calendars/' + this.uid)
+      .valueChanges()
+      .subscribe((val: any) => {
+        this.calendar = val;
+        this.demo = val?.demo ?? false;
+      });
   }
 
   open(index: number) {
     const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
-    this.fileService.get(filename).pipe(take(1), catchError(() => of(''))).subscribe(content => {
-      this.dialog.open(DayDialogComponent, {
-        data: {
-          text: content
-        }
-      })
-    });
+    this.fileService
+      .get(filename)
+      .pipe(
+        take(1),
+        catchError(() => of(''))
+      )
+      .subscribe((content) => {
+        this.dialog.open(DayDialogComponent, {
+          data: {
+            text: content
+          }
+        });
+      });
   }
 }

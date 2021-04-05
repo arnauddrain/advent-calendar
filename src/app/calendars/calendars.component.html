@@ -1,6 +1,4 @@
-<div *ngIf="isLoading">
-  Chargement...
-</div>
+<div *ngIf="isLoading">Chargement...</div>
 
 <ng-container *ngIf="!isLoading">
   <div *ngIf="user">
@@ -14,10 +12,9 @@
     <div>
       <mat-form-field>
         <mat-label>Nom du calendrier</mat-label>
-        <input matInput type="text" [(ngModel)]="newCalendarName">
+        <input matInput type="text" [(ngModel)]="newCalendarName" />
       </mat-form-field>
-      <button mat-flat-button color="primary" (click)="addCalendar()"
-        [disabled]="addingCalendar || !newCalendarName.length">
+      <button mat-flat-button color="primary" (click)="addCalendar()" [disabled]="addingCalendar || !newCalendarName.length">
         Ajouter un calendrier
       </button>
     </div>
@@ -28,7 +25,7 @@
     <h2>Commencez par vous connecter pour créer votre calendrier :</h2>
     <p>
       <button mat-flat-button (click)="login()">
-        <img src="assets/google.svg">
+        <img src="assets/google.svg" />
         Connexion avec Google
       </button>
     </p>

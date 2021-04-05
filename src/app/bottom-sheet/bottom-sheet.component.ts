@@ -7,7 +7,5 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
   styleUrls: ['./bottom-sheet.component.css']
 })
 export class BottomSheetComponent {
-
-  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: { text: string, link: string }) { }
-
+  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: { text: string; link: string }) {}
 }

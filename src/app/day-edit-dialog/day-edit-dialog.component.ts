@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Quill from 'quill';
 
 import ImageResize from 'quill-image-resize';
-Quill.register('modules/imageResize', ImageResize)
+Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'app-day-edit-dialog',
@@ -18,10 +18,7 @@ export class DayEditDialogComponent {
   };
   preview: boolean = false;
 
-  constructor(
-    public dialogRef: MatDialogRef<DayEditDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { text: string }
-  ) {
+  constructor(public dialogRef: MatDialogRef<DayEditDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { text: string }) {
     this.text = data.text;
   }
 
