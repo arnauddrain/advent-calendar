@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Dates du calendrier</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matInput matStartDate [(ngModel)]="startDate" placeholder="Début" />
+      <input matInput matEndDate [(ngModel)]="endDate" placeholder="Fin" />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="save()">Enregistrer</button>
+</mat-dialog-actions>

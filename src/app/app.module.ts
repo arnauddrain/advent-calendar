@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill';
@@ -31,6 +32,9 @@ import { CalendarContentComponent } from './calendar-content/calendar-content.co
 import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-calendar-dialog.component';
+import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { CustomDateAdapter } from './custom-date-adapter';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-c
     DayDialogComponent,
     CalendarContentComponent,
     DayEditDialogComponent,
-    DeleteCalendarDialogComponent
+    DeleteCalendarDialogComponent,
+    SettingsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,10 +69,17 @@ import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-c
     MatDialogModule,
     ClipboardModule,
     MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     HttpClientModule,
     QuillModule.forRoot()
   ],
-  providers: [ScreenTrackingService, UserTrackingService],
+  providers: [
+    ScreenTrackingService,
+    UserTrackingService,
+    { provide: DateAdapter, useClass: CustomDateAdapter },
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

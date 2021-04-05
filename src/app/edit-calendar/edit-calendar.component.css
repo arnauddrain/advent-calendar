@@ -1,5 +1,6 @@
-.right {
-  float: right;
+h1 {
+  display: flex;
+  justify-content: space-between;
 }
 
 mat-icon {

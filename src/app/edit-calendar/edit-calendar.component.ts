@@ -11,6 +11,7 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
 import { DeleteCalendarDialogComponent } from '../delete-calendar-dialog/delete-calendar-dialog.component';
 import { FileService } from '../file.service';
+import { SettingsDialogComponent } from '../settings-dialog/settings-dialog.component';
 
 @Component({
   selector: 'app-edit-calendar',
@@ -46,6 +47,24 @@ export class EditCalendarComponent implements OnInit {
 
   get url(): string {
     return window.location.origin + '/' + this.uid;
+  }
+
+  async settings() {
+    this.analytics.logEvent('Open settings');
+    this.dialog
+      .open(SettingsDialogComponent, {
+        data: {
+          calendar: this.calendar
+        }
+      })
+      .afterClosed()
+      .subscribe((dates) => {
+        if (dates) {
+          this.analytics.logEvent('Save settings');
+          this.db.object('calendars/' + this.uid + '/startDate').set(dates.startDate.toISOString());
+          this.db.object('calendars/' + this.uid + '/endDate').set(dates.endDate.toISOString());
+        }
+      });
   }
 
   async open(index: number) {

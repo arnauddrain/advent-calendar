@@ -1,16 +1,23 @@
 <p *ngIf="!calendar">Chargement...</p>
 <ng-container *ngIf="calendar">
   <h1>
-    <span *ngIf="!editing">{{ calendar.name }}</span>
-    <mat-form-field *ngIf="editing">
-      <input matInput type="text" [(ngModel)]="calendar.name" />
-    </mat-form-field>
-    <mat-icon (click)="edit()">edit</mat-icon>
-    <button matTooltip="Partager" (click)="share()" mat-button class="right" [cdkCopyToClipboard]="url">
-      Partager avec les jours bloqués : <mat-icon>link</mat-icon>
-    </button>
+    <div>
+      <span *ngIf="!editing">{{ calendar.name }}</span>
+      <mat-form-field *ngIf="editing">
+        <input matInput type="text" [(ngModel)]="calendar.name" />
+      </mat-form-field>
+      <mat-icon (click)="edit()">edit</mat-icon>
+    </div>
+    <div>
+      <button matTooltip="Partager" (click)="share()" mat-button [cdkCopyToClipboard]="url">
+        Partager avec les jours cachés : <mat-icon>link</mat-icon>
+      </button>
+      <button matTooltip="Options" (click)="settings()" mat-button>
+        <mat-icon>settings</mat-icon>
+      </button>
+    </div>
   </h1>
-  <app-calendar-content (open)="open($event)" [editing]="true"></app-calendar-content>
+  <app-calendar-content (open)="open($event)" [editing]="true" [calendar]="calendar"></app-calendar-content>
   <p>
     <button mat-flat-button color="warn" (click)="deleteCalendar()">Supprimer le calendrier</button>
   </p>

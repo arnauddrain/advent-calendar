@@ -1,9 +1,9 @@
 <div class="calendar">
-  <div class="day" *ngFor="let day of days; let i = index" (click)="click(i)" [class.enabled]="isAvailable(i)">
+  <div class="day" *ngFor="let day of days" (click)="click(day)" [class.enabled]="this.editing || day.available">
     <div class="day-content">
       <img src="assets/gift.svg" />
       <div class="day-number">
-        {{ i + 1 }}
+        {{ day.date }}
       </div>
     </div>
   </div>
