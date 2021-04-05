@@ -5,7 +5,8 @@
 }
 
 .day {
-  flex: 20%;
+  flex-basis: 20%;
+  flex-grow: 0;
   filter: grayscale(0.9);
 }
 
@@ -46,7 +47,7 @@ img {
 
 @media (max-width: 768px) {
   .day {
-    flex: 33%;
+    flex-basis: 33%;
   }
   .day-number {
     top: 60%;
@@ -55,7 +56,7 @@ img {
 
 @media (max-width: 500px) {
   .day {
-    flex: 100%;
+    flex-basis: 100%;
   }
   .day-number {
     font-size: 50px;
