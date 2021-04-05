@@ -17,11 +17,6 @@
     <router-outlet></router-outlet>
   </mat-card>
   <div class="create-button" *ngIf="router.url.startsWith('/-')">
-    <a mat-flat-button color="primary" href="https://www.buymeacoffee.com/ecalendrier" target="_blank"
-      (click)="eventUser()">
-      Faire un don <mat-icon>favorite</mat-icon></a>
-  </div>
-  <div class="create-button" *ngIf="router.url.startsWith('/-')">
     <a mat-flat-button color="primary" [routerLink]="'/'">Créer mon propre calendrier</a>
   </div>
 </div>
