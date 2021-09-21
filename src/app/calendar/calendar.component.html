@@ -4,7 +4,7 @@
     {{ calendar.name }}
   </h1>
   <p *ngIf="demo">
-    <i>La démo montre l'état d'un calendrier qui commencerait 10 jours dans le passé et terminerai 15 jours après.</i>
+    <i>La démo montre l'état d'un calendrier qui commencerait 10 jours dans le passé et terminerait 15 jours après.</i>
   </p>
   <app-calendar-content (open)="open($event)" [demo]="demo" [calendar]="calendar"></app-calendar-content>
 </ng-container>
