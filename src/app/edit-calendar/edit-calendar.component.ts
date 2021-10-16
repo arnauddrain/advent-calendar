@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';

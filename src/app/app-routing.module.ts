@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarsComponent } from './calendars/calendars.component';

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/analytics';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
