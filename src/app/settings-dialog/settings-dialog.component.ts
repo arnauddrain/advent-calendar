@@ -12,10 +12,10 @@ export class SettingsDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<SettingsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { calendar: any }) {
     if (data.calendar.startDate) {
-      this.startDate = data.calendar.startDate;
+      this.startDate = new Date(data.calendar.startDate);
     }
     if (data.calendar.endDate) {
-      this.endDate = data.calendar.endDate;
+      this.endDate = new Date(data.calendar.endDate);
     }
   }
 
