@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   firebase: {
     apiKey: 'AIzaSyAsBtxr5-Yin0s-3wfhyStn4VESdGjQxOA',
-    authDomain: 'advent-calendar-b80d7.firebaseapp.com', // 'auth.ecalendrier.net'
+    authDomain: 'auth.ecalendrier.net',
     databaseURL: 'https://advent-calendar-b80d7.firebaseio.com',
     projectId: 'advent-calendar-b80d7',
     storageBucket: 'advent-calendar-b80d7.appspot.com',
