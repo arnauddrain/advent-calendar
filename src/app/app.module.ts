@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -19,6 +19,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill';
+import * as Sentry from '@sentry/angular';
+import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,10 +34,8 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { DayDialogComponent } from './day-dialog/day-dialog.component';
 import { CalendarContentComponent } from './calendar-content/calendar-content.component';
 import { DayEditDialogComponent } from './day-edit-dialog/day-edit-dialog.component';
-import { HttpClientModule } from '@angular/common/http';
 import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-calendar-dialog.component';
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
-import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomDateAdapter } from './custom-date-adapter';
 import { HomeComponent } from './home/home.component';
 
@@ -77,10 +79,26 @@ import { HomeComponent } from './home/home.component';
     QuillModule.forRoot()
   ],
   providers: [
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: true
+      })
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router]
+    },
     ScreenTrackingService,
     UserTrackingService,
     { provide: DateAdapter, useClass: CustomDateAdapter },
-    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

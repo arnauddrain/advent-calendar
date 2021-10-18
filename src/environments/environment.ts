@@ -13,6 +13,10 @@ export const environment = {
     messagingSenderId: '317779781951',
     appId: '1:317779781951:web:2c4f4c0e5b9ea8ebc34b8a',
     measurementId: 'G-H1LCVLWWPC'
+  },
+  sentry: {
+    environment: 'development',
+    tracesSampleRate: 1.0
   }
 };
 

@@ -9,5 +9,9 @@ export const environment = {
     messagingSenderId: '463287392377',
     appId: '1:463287392377:web:d265b8498dd54218c25ca8',
     measurementId: 'G-RNKWRY2S12'
+  },
+  sentry: {
+    environment: 'prod',
+    tracesSampleRate: 0.1
   }
 };
