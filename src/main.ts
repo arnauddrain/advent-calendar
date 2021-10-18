@@ -12,6 +12,7 @@ if (environment.production) {
 
 Sentry.init({
   environment: environment.sentry.environment,
+  release: environment.sentry.release,
   dsn: 'https://aa6956a2b7e942da82a2901bd21fd7c4@o1043345.ingest.sentry.io/6012905',
   integrations: [
     new Integrations.BrowserTracing({

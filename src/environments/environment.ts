@@ -16,7 +16,8 @@ export const environment = {
   },
   sentry: {
     environment: 'development',
-    tracesSampleRate: 1.0
+    tracesSampleRate: 1.0,
+    release: 'SENTRY_RELEASE'
   }
 };
 
