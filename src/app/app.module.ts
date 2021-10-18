@@ -82,7 +82,7 @@ import { HomeComponent } from './home/home.component';
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({
-        showDialog: true
+        showDialog: false
       })
     },
     {
