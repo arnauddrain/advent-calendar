@@ -35,6 +35,7 @@ import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-c
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomDateAdapter } from './custom-date-adapter';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CustomDateAdapter } from './custom-date-adapter';
     CalendarContentComponent,
     DayEditDialogComponent,
     DeleteCalendarDialogComponent,
-    SettingsDialogComponent
+    SettingsDialogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

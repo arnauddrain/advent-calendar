@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 
 @Component({
   selector: 'app-calendars',
@@ -14,21 +13,19 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
   styleUrls: ['./calendars.component.css']
 })
 export class CalendarsComponent {
-  isLoading = true;
   newCalendarName: string = '';
   calendars: Observable<any[]> | null;
   user: firebase.User | null = null;
   addingCalendar = false;
 
   constructor(
-    public auth: AngularFireAuth,
-    public db: AngularFireDatabase,
-    private bottomSheet: MatBottomSheet,
-    private analytics: AngularFireAnalytics
+    private auth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    private analytics: AngularFireAnalytics,
+    private router: Router
   ) {
     this.calendars = null;
     auth.user.subscribe((user) => {
-      this.isLoading = false;
       this.user = user;
       this.calendars = this.db
         .list('/calendars', (ref) => ref.orderByChild('author').equalTo(this.user?.uid ?? ''))
@@ -50,30 +47,9 @@ export class CalendarsComponent {
     }
   }
 
-  login() {
-    this.analytics.logEvent('Login');
-    this.analytics.logEvent('Login via Google');
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
-
-  fbLogin() {
-    this.analytics.logEvent('Login');
-    this.analytics.logEvent('Login via Facebook');
-    this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).catch((e) => {
-      if (e.code === 'auth/account-exists-with-different-credential') {
-        this.analytics.logEvent('Error with login via Facebook');
-        this.bottomSheet.open(BottomSheetComponent, {
-          data: {
-            text: 'Cet email est déjà associé à un autre compte, essayez de vous connecter avec Google'
-          }
-        });
-      }
-      console.log(e);
-    });
-  }
-
-  logout() {
+  async logout() {
     this.analytics.logEvent('Logout');
-    this.auth.signOut();
+    await this.auth.signOut();
+    this.router.navigate(['']);
   }
 }

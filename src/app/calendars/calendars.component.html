@@ -1,41 +1,21 @@
-<div *ngIf="isLoading">Chargement...</div>
+<ng-container *ngIf="!user">Chargement...</ng-container>
 
-<ng-container *ngIf="!isLoading">
-  <div *ngIf="user">
-    <h1>Bonjour {{ user.displayName }} !</h1>
-    <h2>Mes calendriers :</h2>
-    <ul>
-      <li *ngFor="let calendar of calendars | async">
-        <a [routerLink]="['edit', calendar.key]">{{ calendar.value.name }}</a>
-      </li>
-    </ul>
-    <div>
-      <mat-form-field>
-        <mat-label>Nom du calendrier</mat-label>
-        <input matInput type="text" [(ngModel)]="newCalendarName" />
-      </mat-form-field>
-      <button mat-flat-button color="primary" (click)="addCalendar()" [disabled]="addingCalendar || !newCalendarName.length">
-        Ajouter un calendrier
-      </button>
-    </div>
-    <button mat-flat-button color="warn" (click)="logout()">Déconnexion</button>
+<ng-container *ngIf="user">
+  <h1>Bonjour {{ user.displayName }} !</h1>
+  <h2>Mes calendriers :</h2>
+  <ul>
+    <li *ngFor="let calendar of calendars | async">
+      <a [routerLink]="['/edit', calendar.key]">{{ calendar.value.name }}</a>
+    </li>
+  </ul>
+  <div>
+    <mat-form-field>
+      <mat-label>Nom du calendrier</mat-label>
+      <input matInput type="text" [(ngModel)]="newCalendarName" />
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="addCalendar()" [disabled]="addingCalendar || !newCalendarName.length">
+      Ajouter un calendrier
+    </button>
   </div>
-
-  <div *ngIf="!user">
-    <h2>Commencez par vous connecter pour créer votre calendrier :</h2>
-    <p>
-      <button mat-flat-button (click)="login()">
-        <img src="assets/google.svg" />
-        Connexion avec Google
-      </button>
-    </p>
-    <p>
-      <button mat-flat-button (click)="fbLogin()">
-        <mat-icon>facebook</mat-icon>
-        Connexion avec Facebook
-      </button>
-    </p>
-    <h2>Ou</h2>
-    <p><a mat-flat-button color="primary" [routerLink]="['-MMm0AnXznQF1ZTaetrC']">Regarder la démo</a></p>
-  </div>
+  <button mat-flat-button color="warn" (click)="logout()">Déconnexion</button>
 </ng-container>
