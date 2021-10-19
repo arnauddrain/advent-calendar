@@ -16,7 +16,7 @@ Sentry.init({
   dsn: 'https://aa6956a2b7e942da82a2901bd21fd7c4@o1043345.ingest.sentry.io/6012905',
   integrations: [
     new Integrations.BrowserTracing({
-      tracingOrigins: ['localhost', 'https://firebasestorage.googleapis.com'],
+      tracingOrigins: ['localhost', 'https://www.ecalendrier.net', 'https://firebasestorage.googleapis.com'],
       routingInstrumentation: Sentry.routingInstrumentation
     })
   ],
