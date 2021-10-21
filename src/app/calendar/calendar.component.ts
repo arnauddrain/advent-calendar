@@ -14,6 +14,7 @@ import { FileService } from '../file.service';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
+  loading = true;
   calendar: any = null;
   uid: string;
   demo = false;
@@ -24,6 +25,7 @@ export class CalendarComponent {
       .object('calendars/' + this.uid)
       .valueChanges()
       .subscribe((val: any) => {
+        this.loading = false;
         this.calendar = val;
         this.demo = val?.demo ?? false;
       });

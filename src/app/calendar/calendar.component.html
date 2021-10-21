@@ -1,4 +1,5 @@
-<p *ngIf="!calendar">Chargement...</p>
+<p *ngIf="loading">Chargement...</p>
+<p *ngIf="!loading && !calendar">Il y a un problème avec le lien, ce calendrier n'existe pas ou a été supprimé.</p>
 <ng-container *ngIf="calendar">
   <h1>
     {{ calendar.name }}
