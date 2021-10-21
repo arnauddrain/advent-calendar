@@ -6,6 +6,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 const redirectLoggedInToCalendars = () => redirectLoggedInTo(['calendars']);
@@ -24,7 +25,8 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToHome }
   },
-  { path: ':uid', component: CalendarComponent }
+  { path: ':uid', component: CalendarComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -38,6 +38,7 @@ import { DeleteCalendarDialogComponent } from './delete-calendar-dialog/delete-c
 import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 import { CustomDateAdapter } from './custom-date-adapter';
 import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { HomeComponent } from './home/home.component';
     DayEditDialogComponent,
     DeleteCalendarDialogComponent,
     SettingsDialogComponent,
-    HomeComponent
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
