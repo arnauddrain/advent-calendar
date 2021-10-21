@@ -59,7 +59,7 @@ export class EditCalendarComponent implements OnInit {
       })
       .afterClosed()
       .subscribe((dates) => {
-        if (dates) {
+        if (dates?.startDate && dates?.endDate) {
           this.analytics.logEvent('Save settings');
           this.db.object('calendars/' + this.uid + '/startDate').set(dates.startDate.toISOString());
           this.db.object('calendars/' + this.uid + '/endDate').set(dates.endDate.toISOString());
