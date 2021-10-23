@@ -40,7 +40,9 @@ export class CalendarsComponent {
       this.addingCalendar = true;
       await this.db.list('/calendars').push({
         name: this.newCalendarName,
-        author: this.user.uid
+        author: this.user.uid,
+        startDate: '2021-11-30T23:00:00.000Z',
+        endDate: '2021-12-24T23:00:00.000Z'
       });
       this.newCalendarName = '';
       this.addingCalendar = false;
