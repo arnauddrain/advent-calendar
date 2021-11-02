@@ -1,0 +1,4 @@
+[build]
+  base = "/"
+  publish = "dist/calendar/browser"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && ng build --configuration production"
