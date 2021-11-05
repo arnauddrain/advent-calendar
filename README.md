@@ -1,5 +1,5 @@
 # Calendrier de l'avent
 
-Un outil de création de calendrier de l'avent en Angular 11.
+Un outil de création de calendrier de l'avent réalisé avec Angular.
 
-Démo disponible [ici](https://ecalendrier.pvsc.fr).
+Démo disponible [ici](https://ecalendrier.net).
