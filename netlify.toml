@@ -2,3 +2,8 @@
   base = "/"
   publish = "dist/calendar/browser"
   command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && npm run prerender"
+
+[[redirects]]
+  from = "/*"
+  to = "/calendars"
+  status = 200
