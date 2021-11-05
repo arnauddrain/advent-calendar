@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import firebase from 'firebase/compat/app';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,6 +14,7 @@ import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.compo
 import { DeleteCalendarDialogComponent } from '../delete-calendar-dialog/delete-calendar-dialog.component';
 import { FileService } from '../file.service';
 import { SettingsDialogComponent } from '../settings-dialog/settings-dialog.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-edit-calendar',
@@ -20,25 +23,39 @@ import { SettingsDialogComponent } from '../settings-dialog/settings-dialog.comp
 })
 export class EditCalendarComponent implements OnInit {
   calendar: any = null;
-  uid: string;
+  uid: string = '';
   editing = false;
+  user: firebase.User | null = null;
 
   constructor(
+    private auth: AngularFireAuth,
     public db: AngularFireDatabase,
     private route: ActivatedRoute,
     private router: Router,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
     private fileService: FileService,
-    private analytics: AngularFireAnalytics
+    private analytics: AngularFireAnalytics,
+    @Inject(PLATFORM_ID) platformId: string
   ) {
-    this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
-    this.db
-      .object('calendars/' + this.uid)
-      .valueChanges()
-      .subscribe((val) => {
-        this.calendar = val;
+    if (isPlatformBrowser(platformId)) {
+      this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
+      this.auth.user.subscribe((user) => {
+        this.user = user;
+        if (!user || (this.calendar && user.uid !== this.calendar.author)) {
+          this.router.navigate(['/']);
+        }
       });
+      this.db
+        .object('calendars/' + this.uid)
+        .valueChanges()
+        .subscribe((val) => {
+          this.calendar = val;
+          if (this.user && this.user.uid !== this.calendar.author) {
+            this.router.navigate(['/']);
+          }
+        });
+    }
   }
 
   ngOnInit() {

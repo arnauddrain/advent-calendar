@@ -23,6 +23,7 @@ import * as Sentry from '@sentry/angular';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import ImageResize from 'quill-image-resize';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,7 +57,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NotFoundComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -78,7 +79,18 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot({
+      customModules: [
+        {
+          implementation: ImageResize,
+          path: 'modules/ImageResize'
+        }
+      ],
+      modules: {
+        ImageResize: true
+      },
+      suppressGlobalRegisterWarning: true
+    })
   ],
   providers: [
     {

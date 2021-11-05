@@ -11,5 +11,6 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background: url('assets/bg.gif');
+  background-color: #0054b1;
+  background-image: url('assets/bg.png');
 }

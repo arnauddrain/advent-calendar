@@ -8,6 +8,8 @@
       <a [routerLink]="['/edit', calendar.key]">{{ calendar.value.name }}</a>
     </li>
   </ul>
+  <i *ngIf="loading">Chargement...</i>
+  <i *ngIf="!loading && (calendars | async)?.length === 0">Vous n'avez pas encore créé de calendrier pour le moment.</i>
   <div>
     <mat-form-field>
       <mat-label>Nom du calendrier</mat-label>

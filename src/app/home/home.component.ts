@@ -18,7 +18,13 @@ export class HomeComponent {
     private bottomSheet: MatBottomSheet,
     private analytics: AngularFireAnalytics,
     private router: Router
-  ) {}
+  ) {
+    this.auth.user.subscribe((user) => {
+      if (user) {
+        this.router.navigate(['calendars']);
+      }
+    });
+  }
 
   async login() {
     this.analytics.logEvent('Login');
