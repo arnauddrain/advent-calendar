@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" *ngIf="!router.url.startsWith('/-')">
-  <a [routerLink]="'/'">eCalendrier de l'avent</a>
+  <a [routerLink]="user ? '/calendars' : '/'">eCalendrier de l'avent</a>
   <div class="flex-spacer"></div>
   <a mat-button href="https://github.com/arnauddrain/advent-calendar" target="_blank">
     <img src="assets/github.svg" />
