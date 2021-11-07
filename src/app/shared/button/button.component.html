@@ -1,5 +1,5 @@
 <a
-  class="flex h-11 w-60 mr-5 mb-3 items-center rounded font-button font-bold cursor-pointer"
+  class="flex h-11 w-60 items-center rounded font-button font-bold cursor-pointer"
   [ngClass]="{ 'bg-blue': theme === 'blue', 'bg-white': theme === 'white', 'bg-black': theme === 'black' }"
 >
   <span class="bg-white p-2 m-1 rounded" [ngClass]="{ 'bg-white': theme === 'blue' }" *ngIf="img"><img [src]="img" /></span>

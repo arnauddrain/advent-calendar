@@ -5,13 +5,13 @@
       Créez gratuitement votre calendrier de l'avent
     </h2>
     <div class="flex flex-wrap">
-      <app-button theme="blue" img="/assets/google.svg" (click)="login()">Connexion avec Google</app-button>
+      <app-button class="lg:mr-5 mb-3 2xl:mb-0" theme="blue" img="/assets/google.svg" (click)="login()">Connexion avec Google</app-button>
       <app-button img="/assets/facebook.svg" (click)="fbLogin()">Connexion avec Facebook</app-button>
     </div>
-    <div class="w-20 h-0.5 bg-black mb-7 mt-4"></div>
+    <div class="w-20 h-0.5 bg-black my-7"></div>
     <a [routerLink]="['/-MMm0AnXznQF1ZTaetrC']"><app-button theme="black" img="/assets/sample.svg">Regarder un exemple</app-button></a>
   </div>
-  <div class="flex-1 invisible md:visible">
+  <div class="flex-1 invisible md:visible flex">
     <img src="/assets/santa.svg" alt="santa" width="100%" />
   </div>
 </div>
