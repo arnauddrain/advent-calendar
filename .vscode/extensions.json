@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "editorconfig.editorconfig",
-    "esbenp.prettier-vscode",
-    "angular.ng-template"
-  ]
+  "recommendations": ["editorconfig.editorconfig", "esbenp.prettier-vscode", "angular.ng-template", "bradlc.vscode-tailwindcss"]
 }

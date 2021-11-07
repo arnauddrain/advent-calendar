@@ -40,6 +40,7 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
 import { CustomDateAdapter } from './custom-date-adapter';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ButtonComponent } from './shared/button/button.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     DeleteCalendarDialogComponent,
     SettingsDialogComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

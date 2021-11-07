@@ -1,15 +1,17 @@
-<h2>Commencez par vous connecter pour créer votre calendrier :</h2>
-<p>
-  <button mat-flat-button (click)="login()">
-    <img alt="Google" width="46" height="46" src="assets/google.svg" />
-    Connexion avec Google
-  </button>
-</p>
-<p>
-  <button mat-flat-button (click)="fbLogin()">
-    <mat-icon>facebook</mat-icon>
-    Connexion avec Facebook
-  </button>
-</p>
-<h2>Ou</h2>
-<p><a mat-flat-button color="primary" [routerLink]="['/-MMm0AnXznQF1ZTaetrC']">Regarder la démo</a></p>
+<div class="flex">
+  <div class="flex-1">
+    <img src="/assets/logo.svg" alt="logo" width="212" />
+    <h2 class="text-white font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl mt-12 mb-10">
+      Créez gratuitement votre calendrier de l'avent
+    </h2>
+    <div class="flex flex-wrap">
+      <app-button theme="blue" img="/assets/google.svg" (click)="login()">Connexion avec Google</app-button>
+      <app-button img="/assets/facebook.svg" (click)="fbLogin()">Connexion avec Facebook</app-button>
+    </div>
+    <div class="w-20 h-0.5 bg-black mb-7 mt-4"></div>
+    <a [routerLink]="['/-MMm0AnXznQF1ZTaetrC']"><app-button theme="black" img="/assets/sample.svg">Regarder un exemple</app-button></a>
+  </div>
+  <div class="flex-1 invisible md:visible">
+    <img src="/assets/santa.svg" alt="santa" width="100%" />
+  </div>
+</div>

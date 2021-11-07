@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" *ngIf="!router.url.startsWith('/-')">
+<!--<mat-toolbar color="primary" *ngIf="!router.url.startsWith('/-')">
   <a [routerLink]="user ? '/calendars' : '/'">eCalendrier de l'avent</a>
   <div class="flex-spacer"></div>
   <a mat-button href="https://github.com/arnauddrain/advent-calendar" target="_blank">
@@ -10,12 +10,15 @@
   <a mat-button href="https://www.buymeacoffee.com/ecalendrier" target="_blank" *ngIf="user" (click)="event()">
     Faire un don <mat-icon>favorite</mat-icon>
   </a>
-</mat-toolbar>
+</mat-toolbar>-->
 
-<div class="container">
-  <mat-card>
+<div class="max-w-4/5 m-auto">
+  <div
+    class="backdrop-filter backdrop-blur-lg rounded-lg p-12"
+    style="background: linear-gradient(104.42deg, rgba(100, 150, 101, 0.4) 0.83%, rgba(240, 0, 35, 0.4) 98.12%)"
+  >
     <router-outlet></router-outlet>
-  </mat-card>
+  </div>
   <div class="create-button" *ngIf="router.url.startsWith('/-')">
     <a mat-flat-button color="primary" [routerLink]="'/'">Créer mon propre calendrier</a>
   </div>
