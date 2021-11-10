@@ -10,13 +10,13 @@ import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendars',
-  templateUrl: './calendars.component.html',
-  styleUrls: ['./calendars.component.css']
+  templateUrl: './calendars.component.html'
 })
 export class CalendarsComponent {
   newCalendarName: string = '';
   calendars: Observable<any[]> | null = null;
   user: firebase.User | null = null;
+  savingCalendar = false;
   addingCalendar = false;
   loading = true;
 
@@ -44,10 +44,14 @@ export class CalendarsComponent {
     }
   }
 
-  async addCalendar() {
-    if (this.user && !this.addingCalendar) {
+  addCalendar() {
+    this.addingCalendar = true;
+  }
+
+  async saveCalendar() {
+    if (this.user && !this.savingCalendar) {
       this.analytics.logEvent('Create calendar');
-      this.addingCalendar = true;
+      this.savingCalendar = true;
       await this.db.list('/calendars').push({
         name: this.newCalendarName,
         author: this.user.uid,
@@ -55,7 +59,7 @@ export class CalendarsComponent {
         endDate: '2021-12-24T23:00:00.000Z'
       });
       this.newCalendarName = '';
-      this.addingCalendar = false;
+      this.savingCalendar = false;
     }
   }
 

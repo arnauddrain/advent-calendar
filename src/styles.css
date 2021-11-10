@@ -12,4 +12,5 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   background-color: #3a3937;
   background-image: url('assets/bg.png');
+  color: white;
 }

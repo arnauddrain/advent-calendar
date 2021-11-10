@@ -41,6 +41,7 @@ import { CustomDateAdapter } from './custom-date-adapter';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ButtonComponent } from './shared/button/button.component';
+import { AddCalendarDialogComponent } from './add-calendar-dialog/add-calendar-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ButtonComponent } from './shared/button/button.component';
     SettingsDialogComponent,
     HomeComponent,
     NotFoundComponent,
-    ButtonComponent
+    ButtonComponent,
+    AddCalendarDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
