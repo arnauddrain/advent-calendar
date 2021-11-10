@@ -17,11 +17,11 @@ export class AppComponent {
     });
   }
 
-  event() {
+  donationEvent() {
     this.analytics.logEvent('Click on donation');
   }
 
-  eventUser() {
-    this.analytics.logEvent('Click on donation user');
+  contactEvent() {
+    this.analytics.logEvent('Click on contact');
   }
 }
