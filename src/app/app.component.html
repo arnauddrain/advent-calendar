@@ -7,7 +7,10 @@
   <a mat-button href="https://www.facebook.com/ECalendrier-de-lavent-108201144469459" target="_blank">
     <mat-icon>facebook</mat-icon>
   </a>
-  <a mat-button href="https://www.buymeacoffee.com/ecalendrier" target="_blank" *ngIf="user" (click)="event()">
+  <a mat-button href="https://www.facebook.com/messages/t/108201144469459" target="_blank" *ngIf="user" (click)="contactEvent()">
+    Contacter <mat-icon>email</mat-icon>
+  </a>
+  <a mat-button href="https://www.buymeacoffee.com/ecalendrier" target="_blank" *ngIf="user" (click)="donationEvent()">
     Faire un don <mat-icon>favorite</mat-icon>
   </a>
 </mat-toolbar>
