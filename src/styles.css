@@ -3,14 +3,14 @@
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.bubble.css';
 @import '~quill/dist/quill.snow.css';
-html,
-body {
-  height: 100%;
-}
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-color: #0054b1;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  background-color: #3a3937;
   background-image: url('assets/bg.png');
+  color: white;
 }

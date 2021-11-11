@@ -1,23 +1,38 @@
-<ng-container *ngIf="!user">Chargement...</ng-container>
+<app-top-bar></app-top-bar>
 
-<ng-container *ngIf="user">
-  <h1>Bonjour {{ user.displayName }} !</h1>
-  <h2>Mes calendriers :</h2>
-  <ul>
-    <li *ngFor="let calendar of calendars | async">
-      <a [routerLink]="['/edit', calendar.key]">{{ calendar.value.name }}</a>
-    </li>
-  </ul>
-  <i *ngIf="loading">Chargement...</i>
-  <i *ngIf="!loading && (calendars | async)?.length === 0">Vous n'avez pas encore créé de calendrier pour le moment.</i>
-  <div>
-    <mat-form-field>
-      <mat-label>Nom du calendrier</mat-label>
-      <input matInput type="text" [(ngModel)]="newCalendarName" />
-    </mat-form-field>
-    <button mat-flat-button color="primary" (click)="addCalendar()" [disabled]="addingCalendar || !newCalendarName.length">
-      Ajouter un calendrier
-    </button>
+<ng-container *ngIf="!user"><app-spinner></app-spinner></ng-container>
+
+<ng-container *ngIf="user" class="">
+  <h1 class="text-4xl mb-4">Bonjour {{ user.displayName }} !</h1>
+  <h2 class="text-2xl mb-3">Mes calendriers :</h2>
+  <div class="mb-6 flex flex-wrap">
+    <a
+      *ngFor="let calendar of calendars | async"
+      [routerLink]="['/edit', calendar.key]"
+      class="rounded mr-2 mb-2 flex p-8 border-2 border-solid border-gray-100 hover:bg-gray-100 hover:text-black bg-white bg-opacity-30"
+    >
+      {{ calendar.value.name }}
+    </a>
+    <a
+      class="
+        rounded
+        mr-2
+        mb-2
+        flex
+        p-8
+        border-2 border-dashed
+        cursor-pointer
+        border-gray-100
+        hover:bg-gray-100 hover:text-black
+        bg-white bg-opacity-30
+      "
+      (click)="addCalendar()"
+    >
+      + Ajouter un calendrier
+    </a>
   </div>
-  <button mat-flat-button color="warn" (click)="logout()">Déconnexion</button>
+  <ng-container *ngIf="loading"><app-spinner></app-spinner></ng-container>
+  <div class="mb-1">
+    <button class="bg-red rounded px-4 py-2 flex" (click)="logout()"><mat-icon class="mr-1">logout</mat-icon>Déconnexion</button>
+  </div>
 </ng-container>

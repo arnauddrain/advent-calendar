@@ -34,7 +34,6 @@ export class EditCalendarComponent implements OnInit {
     private router: Router,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
-    private fileService: FileService,
     private analytics: AngularFireAnalytics,
     @Inject(PLATFORM_ID) platformId: string
   ) {
@@ -87,27 +86,11 @@ export class EditCalendarComponent implements OnInit {
   async open(index: number) {
     this.analytics.logEvent('Open day');
     const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
-    this.fileService
-      .get(filename)
-      .pipe(
-        take(1),
-        catchError(() => of(''))
-      )
-      .subscribe((content) => {
-        this.dialog
-          .open(DayEditDialogComponent, {
-            data: {
-              text: content
-            }
-          })
-          .afterClosed()
-          .subscribe((result) => {
-            if (result) {
-              this.analytics.logEvent('Save day');
-              this.fileService.upload(filename, result);
-            }
-          });
-      });
+    this.dialog.open(DayEditDialogComponent, {
+      data: {
+        filename: filename
+      }
+    });
   }
 
   share() {

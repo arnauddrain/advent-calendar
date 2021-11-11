@@ -3,21 +3,20 @@ import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { AddCalendarDialogComponent } from '../add-calendar-dialog/add-calendar-dialog.component';
 
 @Component({
   selector: 'app-calendars',
-  templateUrl: './calendars.component.html',
-  styleUrls: ['./calendars.component.css']
+  templateUrl: './calendars.component.html'
 })
 export class CalendarsComponent {
-  newCalendarName: string = '';
   calendars: Observable<any[]> | null = null;
   user: firebase.User | null = null;
-  addingCalendar = false;
   loading = true;
 
   constructor(
@@ -25,6 +24,7 @@ export class CalendarsComponent {
     private db: AngularFireDatabase,
     private analytics: AngularFireAnalytics,
     private router: Router,
+    private dialog: MatDialog,
     @Inject(PLATFORM_ID) platformId: string
   ) {
     if (isPlatformBrowser(platformId)) {
@@ -44,19 +44,12 @@ export class CalendarsComponent {
     }
   }
 
-  async addCalendar() {
-    if (this.user && !this.addingCalendar) {
-      this.analytics.logEvent('Create calendar');
-      this.addingCalendar = true;
-      await this.db.list('/calendars').push({
-        name: this.newCalendarName,
-        author: this.user.uid,
-        startDate: '2021-11-30T23:00:00.000Z',
-        endDate: '2021-12-24T23:00:00.000Z'
-      });
-      this.newCalendarName = '';
-      this.addingCalendar = false;
-    }
+  addCalendar() {
+    this.dialog.open(AddCalendarDialogComponent, {
+      data: {
+        user: this.user
+      }
+    });
   }
 
   async logout() {

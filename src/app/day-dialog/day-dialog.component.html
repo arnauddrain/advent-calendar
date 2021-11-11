@@ -1,3 +1,4 @@
 <mat-dialog-content>
-  <div class="ql-editor" [innerHTML]="text"></div>
+  <app-spinner color="black" *ngIf="loading"></app-spinner>
+  <div class="ql-editor" [innerHTML]="text" *ngIf="!loading"></div>
 </mat-dialog-content>

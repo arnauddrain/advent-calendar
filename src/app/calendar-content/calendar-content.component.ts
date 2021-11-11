@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core
 
 @Component({
   selector: 'app-calendar-content',
-  templateUrl: './calendar-content.component.html',
-  styleUrls: ['./calendar-content.component.css']
+  templateUrl: './calendar-content.component.html'
 })
 export class CalendarContentComponent implements OnChanges {
   @Output() open = new EventEmitter<number>();

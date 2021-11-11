@@ -1,4 +1,5 @@
-<p *ngIf="!calendar">Chargement...</p>
+<app-top-bar></app-top-bar>
+<app-spinner *ngIf="!calendar"></app-spinner>
 <ng-container *ngIf="calendar">
   <h1>
     <div>
@@ -19,6 +20,6 @@
   </h1>
   <app-calendar-content (open)="open($event)" [editing]="true" [calendar]="calendar"></app-calendar-content>
   <p>
-    <button mat-flat-button color="warn" (click)="deleteCalendar()">Supprimer le calendrier</button>
+    <button mat-flat-button color="warn" (click)="deleteCalendar()"><mat-icon>delete</mat-icon> Supprimer le calendrier</button>
   </p>
 </ng-container>

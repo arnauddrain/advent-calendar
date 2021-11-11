@@ -1,25 +1,8 @@
-<mat-toolbar color="primary" *ngIf="!router.url.startsWith('/-')">
-  <a [routerLink]="user ? '/calendars' : '/'">eCalendrier de l'avent</a>
-  <div class="flex-spacer"></div>
-  <a mat-button href="https://github.com/arnauddrain/advent-calendar" target="_blank">
-    <img alt="GitHub" width="20" height="20" src="assets/github.svg" />
-  </a>
-  <a mat-button href="https://www.facebook.com/ECalendrier-de-lavent-108201144469459" target="_blank">
-    <mat-icon>facebook</mat-icon>
-  </a>
-  <a mat-button href="https://www.facebook.com/messages/t/108201144469459" target="_blank" *ngIf="user" (click)="contactEvent()">
-    Contacter <mat-icon>email</mat-icon>
-  </a>
-  <a mat-button href="https://www.buymeacoffee.com/ecalendrier" target="_blank" *ngIf="user" (click)="donationEvent()">
-    Faire un don <mat-icon>favorite</mat-icon>
-  </a>
-</mat-toolbar>
-
-<div class="container">
-  <mat-card>
+<div class="w-4/5 max-w-7xl m-auto my-12">
+  <div
+    class="backdrop-filter backdrop-blur-lg rounded-lg p-6 lg:p-12"
+    style="background: linear-gradient(104.42deg, rgba(100, 150, 101, 0.4) 0.83%, rgba(240, 0, 35, 0.4) 98.12%)"
+  >
     <router-outlet></router-outlet>
-  </mat-card>
-  <div class="create-button" *ngIf="router.url.startsWith('/-')">
-    <a mat-flat-button color="primary" [routerLink]="'/'">Créer mon propre calendrier</a>
   </div>
 </div>

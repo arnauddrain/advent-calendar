@@ -1,12 +1,16 @@
-<mat-dialog-content>
-  <div class="header">Prévisualiser: <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle></div>
+<mat-dialog-content *ngIf="loading"><app-spinner color="black"></app-spinner></mat-dialog-content>
+<mat-dialog-content *ngIf="!loading">
+  <div class="mb-3 text-right">Prévisualiser: <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle></div>
   <quill-editor [(ngModel)]="text" *ngIf="!preview"></quill-editor>
   <div class="ql-editor preview" [innerHTML]="text" *ngIf="preview"></div>
   <p>
-    <button mat-flat-button color="primary" (click)="save()">Ok</button>
+    <button class="text-white bg-green rounded px-4 py-2 mt-4" (click)="save()">
+      <ng-container *ngIf="!saving">Ok</ng-container>
+      <ng-container *ngIf="saving"><app-spinner></app-spinner></ng-container>
+    </button>
   </p>
-  <p><i *ngIf="!preview">Vous pouvez redimensionner les images en cliquant dessus.</i></p>
-  <p class="error" *ngIf="text && text.length >= 2000000">
+  <p class="mt-4 italic" *ngIf="!preview">Vous pouvez redimensionner les images en cliquant dessus.</p>
+  <p class="text-red mt-4" *ngIf="text && text.length >= 2000000">
     Chaque jour est limité à 2Mo de données, essayez de réduire la taille de vos images.
   </p>
 </mat-dialog-content>

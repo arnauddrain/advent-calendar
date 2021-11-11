@@ -40,6 +40,10 @@ import { SettingsDialogComponent } from './settings-dialog/settings-dialog.compo
 import { CustomDateAdapter } from './custom-date-adapter';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ButtonComponent } from './shared/button/button.component';
+import { AddCalendarDialogComponent } from './add-calendar-dialog/add-calendar-dialog.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     DeleteCalendarDialogComponent,
     SettingsDialogComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ButtonComponent,
+    AddCalendarDialogComponent,
+    SpinnerComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
