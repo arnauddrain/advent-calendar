@@ -15,6 +15,11 @@
       <mat-icon>edit</mat-icon>
     </span>
     <span class="absolute text-lg">{{ day.date }}</span>
-    <img class="mt-4" [src]="day.available ? '/assets/gift.svg' : '/assets/gift-disabled.svg'" width="130" />
+    <img
+      class="mt-4"
+      [src]="day.available ? '/assets/gift.svg' : '/assets/gift-disabled.svg'"
+      width="130"
+      [height]="day.available ? 111 : 115"
+    />
   </div>
 </div>
