@@ -33,18 +33,10 @@ export class CalendarComponent {
 
   open(index: number) {
     const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
-    this.fileService
-      .get(filename)
-      .pipe(
-        take(1),
-        catchError(() => of(''))
-      )
-      .subscribe((content) => {
-        this.dialog.open(DayDialogComponent, {
-          data: {
-            text: content
-          }
-        });
-      });
+    this.dialog.open(DayDialogComponent, {
+      data: {
+        filename: filename
+      }
+    });
   }
 }

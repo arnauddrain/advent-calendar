@@ -1,16 +1,3 @@
-.right {
-  float: right;
-}
-
-:host mat-dialog-content::ng-deep .header {
-  margin-bottom: 10px;
-  text-align: right;
-}
-
-:host mat-dialog-content::ng-deep p.error {
-  color: red;
-}
-
 :host ::ng-deep .preview img {
   max-width: 100% !important;
 }

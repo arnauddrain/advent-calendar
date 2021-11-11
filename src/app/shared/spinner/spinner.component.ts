@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html'
 })
-export class SpinnerComponent {}
+export class SpinnerComponent {
+  @Input() color = 'white';
+}
