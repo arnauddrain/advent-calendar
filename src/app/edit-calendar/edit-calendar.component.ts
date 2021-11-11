@@ -6,13 +6,10 @@ import firebase from 'firebase/compat/app';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
-import { catchError, take } from 'rxjs/operators';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
 import { DeleteCalendarDialogComponent } from '../delete-calendar-dialog/delete-calendar-dialog.component';
-import { FileService } from '../file.service';
 import { SettingsDialogComponent } from '../settings-dialog/settings-dialog.component';
 import { isPlatformBrowser } from '@angular/common';
 
