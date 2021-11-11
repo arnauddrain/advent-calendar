@@ -1,10 +1,20 @@
-<div class="calendar">
-  <div class="day" *ngFor="let day of days" (click)="click(day)" [class.enabled]="this.editing || day.available">
-    <div class="day-content">
-      <img src="assets/gift.svg" />
-      <div class="day-number">
-        {{ day.date }}
-      </div>
-    </div>
+<div class="flex flex-wrap justify-center mt-8">
+  <div
+    class="day"
+    *ngFor="let day of days"
+    (click)="click(day)"
+    class="rounded mb-6 mr-6 flex p-6 bg-opacity-30 relative cursor-pointer border border-opacity-30"
+    [class.cursor-pointer]="this.editing || day.available"
+    [class.bg-white]="day.available"
+    [class.hover:bg-gray-100]="this.editing || day.available"
+    [class.hover:text-black]="this.editing || day.available"
+    [matTooltip]="!this.editing && !day.available ? 'Ce jour n\'est pas encore visible !' : ''"
+    matTooltipPosition="above"
+  >
+    <span *ngIf="editing" class="absolute text-white flex rounded-full bg-green -top-5 -right-5 w-10 h-10 justify-center items-center">
+      <mat-icon>edit</mat-icon>
+    </span>
+    <span class="absolute text-lg">{{ day.date }}</span>
+    <img class="mt-4" [src]="day.available ? '/assets/gift.svg' : '/assets/gift-disabled.svg'" width="130" />
   </div>
 </div>
