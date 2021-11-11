@@ -42,6 +42,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { AddCalendarDialogComponent } from './add-calendar-dialog/add-calendar-dialog.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AddCalendarDialogComponent } from './add-calendar-dialog/add-calendar-d
     HomeComponent,
     NotFoundComponent,
     ButtonComponent,
-    AddCalendarDialogComponent
+    AddCalendarDialogComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

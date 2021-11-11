@@ -1,4 +1,4 @@
-<ng-container *ngIf="!user">Chargement...</ng-container>
+<ng-container *ngIf="!user"><app-spinner></app-spinner></ng-container>
 
 <ng-container *ngIf="user" class="">
   <h1 class="text-4xl mb-4">Bonjour {{ user.displayName }} !</h1>
@@ -29,7 +29,7 @@
       + Ajouter un calendrier
     </a>
   </div>
-  <i *ngIf="loading">Chargement...</i>
+  <ng-container *ngIf="loading"><app-spinner></app-spinner></ng-container>
   <div class="mb-1">
     <button class="bg-red rounded px-4 py-2" (click)="logout()">Déconnexion</button>
   </div>

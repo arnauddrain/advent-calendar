@@ -1,3 +1,13 @@
-<mat-dialog-content>
-  <p>add-calendar-dialog works!</p>
-</mat-dialog-content>
+<form (submit)="saveCalendar()">
+  <mat-dialog-content>
+    <h2 class="text-xl">Créer un nouveau calendrier</h2>
+    <h3 class="text-lg">Nom du calendrier</h3>
+    <input required [(ngModel)]="name" name="name" class="rounded bg-none border-solid border-black border px-4 py-2 outline-none" />
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="submit" class="text-white bg-green rounded px-4 py-2">
+      <ng-container *ngIf="!savingCalendar">Sauvegarder</ng-container>
+      <ng-container *ngIf="savingCalendar"><app-spinner></app-spinner></ng-container>
+    </button>
+  </mat-dialog-actions>
+</form>

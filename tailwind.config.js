@@ -12,7 +12,8 @@ module.exports = {
       colors: {
         blue: '#4285F4',
         black: '#333333',
-        red: '#F00023'
+        red: '#F00023',
+        green: '#2E9598'
       },
       gradientColorStops: {
         green: 'rgba(100, 150, 101, 0.4)',
