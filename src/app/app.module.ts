@@ -6,8 +6,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/compat/analytics';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -74,8 +72,6 @@ import { TopBarComponent } from './top-bar/top-bar.component';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatCardModule,
     MatButtonModule,
     MatInputModule,
     MatIconModule,
