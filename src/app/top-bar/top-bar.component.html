@@ -1,6 +1,6 @@
-<div class="mb-14 flex justify-between items-center flex-wrap">
+<div class="mb-14 flex justify-between items-center flex-col md:flex-row">
   <a [routerLink]="'/calendars'"><img src="/assets/logo.svg" alt="logo" width="212" height="59" /></a>
-  <div class="flex items-center text-white">
+  <div class="flex flex-wrap items-center text-white mt-4 md:mt-0">
     <a href="https://github.com/arnauddrain/advent-calendar" target="_blank">
       <app-button size="small" class="mr-2">
         <img alt="GitHub" width="23" height="23" src="assets/github.svg" />
@@ -18,7 +18,7 @@
       href="https://www.buymeacoffee.com/ecalendrier"
       target="_blank"
       (click)="donationEvent()"
-      class="bg-red rounded px-8 py-4 flex items-center"
+      class="bg-red rounded px-4 py-2 lg:px-8 lg:py-4 flex items-center"
     >
       Soutenir le projet
     </a>
