@@ -6,7 +6,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/compat/analytics';
-import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -74,7 +73,6 @@ import { SocialButtonComponent } from './shared/social-button/social-button.comp
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    MatButtonModule,
     MatInputModule,
     MatIconModule,
     MatTooltipModule,

@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Size } from '../sizes';
+import { Theme } from '../theme';
 
 @Component({
   selector: 'app-button',
@@ -6,7 +8,7 @@ import { Component, Input } from '@angular/core';
   host: { class: 'flex' }
 })
 export class ButtonComponent {
-  @Input() theme: 'danger' | 'success' | 'transparent' = 'transparent';
-  @Input() href = '';
-  @Input() size: 'small' | 'normal' | 'large' = 'normal';
+  @Input() theme: Theme = 'transparent';
+  @Input() type = '';
+  @Input() size: Size = 'normal';
 }

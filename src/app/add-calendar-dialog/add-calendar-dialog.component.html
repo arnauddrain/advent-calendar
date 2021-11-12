@@ -5,9 +5,9 @@
     <input required [(ngModel)]="name" name="name" class="rounded bg-none border-solid border-black border px-4 py-2 outline-none" />
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="submit" class="text-white bg-green rounded px-4 py-2">
+    <app-button type="submit" theme="success">
       <ng-container *ngIf="!savingCalendar">Sauvegarder</ng-container>
       <ng-container *ngIf="savingCalendar"><app-spinner></app-spinner></ng-container>
-    </button>
+    </app-button>
   </mat-dialog-actions>
 </form>

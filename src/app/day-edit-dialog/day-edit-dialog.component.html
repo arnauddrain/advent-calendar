@@ -4,10 +4,10 @@
   <quill-editor [(ngModel)]="text" *ngIf="!preview"></quill-editor>
   <div class="ql-editor preview" [innerHTML]="text" *ngIf="preview"></div>
   <p>
-    <button class="text-white bg-green rounded px-4 py-2 mt-4" (click)="save()">
+    <app-button theme="success" class="mt-4" (click)="save()">
       <ng-container *ngIf="!saving">Ok</ng-container>
       <ng-container *ngIf="saving"><app-spinner></app-spinner></ng-container>
-    </button>
+    </app-button>
   </p>
   <p class="mt-4 italic" *ngIf="!preview">Vous pouvez redimensionner les images en cliquant dessus.</p>
   <p class="text-red mt-4" *ngIf="text && text.length >= 2000000">

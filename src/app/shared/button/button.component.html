@@ -1,20 +1,18 @@
-<a
-  [attr.href]="href ? href : null"
-  [attr.target]="href ? '_blank' : null"
+<button
+  [attr.type]="type"
   class="flex rounded cursor-pointer py-2"
   [ngClass]="{
     'px-2': size === 'small',
     'px-4': size === 'normal',
     'px-6': size === 'large',
     'bg-red': theme === 'danger',
-    'bg-black': ['black', 'transparent'].includes(theme),
+    'bg-green': theme === 'success',
+    'bg-black': ['dark', 'transparent'].includes(theme),
     'bg-opacity-0': theme === 'transparent',
     'hover:bg-opacity-10': theme === 'transparent',
     'hover:bg-opacity-90': theme !== 'transparent',
-    'text-white': ['danger'].includes(theme)
+    'text-white': ['danger', 'success'].includes(theme)
   }"
 >
-  <ng-container>
-    <ng-content></ng-content>
-  </ng-container>
-</a>
+  <ng-content></ng-content>
+</button>

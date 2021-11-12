@@ -1,15 +1,19 @@
 <div class="mb-14 flex justify-between items-center flex-wrap">
   <a [routerLink]="'/calendars'"><img src="/assets/logo.svg" alt="logo" width="212" height="59" /></a>
   <div class="flex items-center text-white">
-    <app-button theme="transparent" size="small" href="https://github.com/arnauddrain/advent-calendar" class="mr-2">
-      <img alt="GitHub" width="23" height="23" src="assets/github.svg" />
-    </app-button>
-    <app-button theme="transparent" size="small" href="https://www.facebook.com/ECalendrier-de-lavent-108201144469459">
-      <mat-icon>facebook</mat-icon>
-    </app-button>
-    <app-button class="mr-2" theme="transparent" href="https://www.facebook.com/messages/t/108201144469459" (click)="contactEvent()">
-      Contacter <mat-icon class="ml-1">email</mat-icon>
-    </app-button>
+    <a href="https://github.com/arnauddrain/advent-calendar" target="_blank">
+      <app-button size="small" class="mr-2">
+        <img alt="GitHub" width="23" height="23" src="assets/github.svg" />
+      </app-button>
+    </a>
+    <a href="https://www.facebook.com/ECalendrier-de-lavent-108201144469459" target="_blank">
+      <app-button size="small">
+        <mat-icon>facebook</mat-icon>
+      </app-button>
+    </a>
+    <a href="https://www.facebook.com/messages/t/108201144469459" target="_blank">
+      <app-button class="mr-2" (click)="contactEvent()"> Contacter <mat-icon class="ml-1">email</mat-icon></app-button>
+    </a>
     <a
       href="https://www.buymeacoffee.com/ecalendrier"
       target="_blank"
