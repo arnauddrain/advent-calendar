@@ -12,6 +12,7 @@ import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.compo
 import { DeleteCalendarDialogComponent } from '../delete-calendar-dialog/delete-calendar-dialog.component';
 import { SettingsDialogComponent } from '../settings-dialog/settings-dialog.component';
 import { isPlatformBrowser } from '@angular/common';
+import { Calendar } from '../calendar';
 
 @Component({
   selector: 'app-edit-calendar',
@@ -19,7 +20,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./edit-calendar.component.css']
 })
 export class EditCalendarComponent implements OnInit {
-  calendar: any = null;
+  calendar: Calendar | null = null;
   uid: string = '';
   editing = false;
   user: firebase.User | null = null;
@@ -43,12 +44,12 @@ export class EditCalendarComponent implements OnInit {
         }
       });
       this.db
-        .object('calendars/' + this.uid)
+        .object<Calendar>('calendars/' + this.uid)
         .valueChanges()
-        .subscribe((val) => {
+        .subscribe((val: Calendar | null) => {
           this.calendar = val;
-          if (this.user && this.user.uid !== this.calendar.author) {
-            this.router.navigate(['/']);
+          if (this.user && this.user.uid !== this.calendar?.author) {
+            this.router.navigate(['/calendars']);
           }
         });
     }
@@ -82,7 +83,7 @@ export class EditCalendarComponent implements OnInit {
 
   async open(index: number) {
     this.analytics.logEvent('Open day');
-    const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
+    const filename = this.calendar?.author + '/calendars/' + this.uid + '/' + index + '.html';
     this.dialog.open(DayEditDialogComponent, {
       data: {
         filename: filename
@@ -101,7 +102,7 @@ export class EditCalendarComponent implements OnInit {
   }
 
   edit() {
-    if (this.editing) {
+    if (this.editing && this.calendar) {
       this.analytics.logEvent('Edit calendar name');
       this.db.object('calendars/' + this.uid + '/name').set(this.calendar.name);
     }
@@ -121,7 +122,7 @@ export class EditCalendarComponent implements OnInit {
               text: `Le calendrier a bien été supprimé. En cas d'erreur vous pouvez joindre l'administrateur via la page Facebook (lien en haut à droite)`
             }
           });
-          this.router.navigate(['']);
+          this.router.navigate(['/calendars']);
         }
       });
   }
