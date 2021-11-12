@@ -1,6 +1,6 @@
-<div class="mb-14 flex justify-between items-center flex-wrap">
+<div class="mb-14 flex justify-between items-center flex-col md:flex-row">
   <a [routerLink]="'/'"><img src="/assets/logo.svg" alt="logo" width="212" height="59" /></a>
-  <div class="flex items-center text-white">
+  <div class="flex items-center text-white mt-4 d:mt-0 text-center">
     <a [routerLink]="['/']"><app-button theme="dark">Créer mon propre calendrier</app-button></a>
   </div>
 </div>
@@ -11,7 +11,7 @@
   <h1 class="text-3xl">
     {{ calendar.name }}
   </h1>
-  <p *ngIf="demo">
+  <p *ngIf="demo" class="mt-2">
     <i>La démo montre l'état d'un calendrier qui commencerait 10 jours dans le passé et terminerait 15 jours après.</i>
   </p>
   <app-calendar-content (open)="open($event)" [demo]="demo" [calendar]="calendar"></app-calendar-content>
