@@ -42,6 +42,7 @@ import { ButtonComponent } from './shared/button/button.component';
 import { AddCalendarDialogComponent } from './add-calendar-dialog/add-calendar-dialog.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { SocialButtonComponent } from './shared/social-button/social-button.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { TopBarComponent } from './top-bar/top-bar.component';
     ButtonComponent,
     AddCalendarDialogComponent,
     SpinnerComponent,
-    TopBarComponent
+    TopBarComponent,
+    SocialButtonComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
