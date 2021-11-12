@@ -9,17 +9,17 @@
       </mat-form-field>
       <mat-icon (click)="edit()">edit</mat-icon>
     </div>
-    <div>
-      <button matTooltip="Partager" (click)="share()" mat-button [cdkCopyToClipboard]="url">
+    <div class="flex">
+      <app-button matTooltip="Partager" (click)="share()" [cdkCopyToClipboard]="url" theme="transparent">
         Partager avec les jours cachés : <mat-icon>link</mat-icon>
-      </button>
-      <button matTooltip="Options" (click)="settings()" class="bg-black bg-opacity-0 hover:bg-opacity-5">
+      </app-button>
+      <app-button matTooltip="Options" (click)="settings()" theme="transparent">
         <mat-icon>settings</mat-icon>
-      </button>
+      </app-button>
     </div>
   </h1>
   <app-calendar-content (open)="open($event)" [editing]="true" [calendar]="calendar"></app-calendar-content>
   <p>
-    <button mat-flat-button color="warn" (click)="deleteCalendar()"><mat-icon>delete</mat-icon> Supprimer le calendrier</button>
+    <app-button theme="danger" (click)="deleteCalendar()"><mat-icon>delete</mat-icon> Supprimer le calendrier</app-button>
   </p>
 </ng-container>

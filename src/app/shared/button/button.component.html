@@ -1,14 +1,20 @@
 <a
-  class="flex h-11 w-60 items-center rounded font-button font-bold cursor-pointer"
-  [ngClass]="{ 'bg-blue': theme === 'blue', 'bg-white': theme === 'white', 'bg-black': theme === 'black' }"
+  [attr.href]="href ? href : null"
+  [attr.target]="href ? '_blank' : null"
+  class="flex rounded cursor-pointer py-2"
+  [ngClass]="{
+    'px-2': size === 'small',
+    'px-4': size === 'normal',
+    'px-6': size === 'large',
+    'bg-red': theme === 'danger',
+    'bg-black': ['black', 'transparent'].includes(theme),
+    'bg-opacity-0': theme === 'transparent',
+    'hover:bg-opacity-10': theme === 'transparent',
+    'hover:bg-opacity-90': theme !== 'transparent',
+    'text-white': ['danger'].includes(theme)
+  }"
 >
-  <span class="bg-white p-2 m-1 rounded" [ngClass]="{ 'bg-white': theme === 'blue' }" *ngIf="img"
-    ><img [src]="img" width="24" height="24"
-  /></span>
-  <span
-    class="text-sm text-center flex-1"
-    [ngClass]="{ 'text-white': ['blue', 'transparent', 'black'].includes(theme), 'text-black': theme === 'white' }"
-  >
+  <ng-container>
     <ng-content></ng-content>
-  </span>
+  </ng-container>
 </a>

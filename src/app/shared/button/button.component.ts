@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   host: { class: 'flex' }
 })
 export class ButtonComponent {
-  @Input() theme: 'white' | 'blue' | 'transparent' | 'black' = 'white';
-  @Input() img?: string;
+  @Input() theme: 'danger' | 'success' | 'transparent' = 'transparent';
+  @Input() href = '';
+  @Input() size: 'small' | 'normal' | 'large' = 'normal';
 }

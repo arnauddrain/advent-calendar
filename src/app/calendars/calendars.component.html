@@ -33,6 +33,6 @@
   </div>
   <ng-container *ngIf="loading"><app-spinner></app-spinner></ng-container>
   <div class="mb-1">
-    <button class="bg-red rounded px-4 py-2 flex" (click)="logout()"><mat-icon class="mr-1">logout</mat-icon>Déconnexion</button>
+    <app-button theme="danger"><mat-icon class="mr-1">logout</mat-icon>Déconnexion</app-button>
   </div>
 </ng-container>
