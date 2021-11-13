@@ -42,6 +42,7 @@ import { AddCalendarDialogComponent } from './add-calendar-dialog/add-calendar-d
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SocialButtonComponent } from './shared/social-button/social-button.component';
+import { BypassPipe } from './shared/bypass.pipe';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { SocialButtonComponent } from './shared/social-button/social-button.comp
     AddCalendarDialogComponent,
     SpinnerComponent,
     TopBarComponent,
-    SocialButtonComponent
+    SocialButtonComponent,
+    BypassPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

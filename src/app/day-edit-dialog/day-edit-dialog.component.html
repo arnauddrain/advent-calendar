@@ -2,8 +2,8 @@
 <mat-dialog-content *ngIf="!loading">
   <div class="mb-3 text-right">Prévisualiser: <mat-slide-toggle [(ngModel)]="preview"></mat-slide-toggle></div>
   <quill-editor [(ngModel)]="text" *ngIf="!preview"></quill-editor>
-  <div class="ql-editor preview" [innerHTML]="text" *ngIf="preview"></div>
-  <p>
+  <div class="ql-editor preview" [innerHTML]="text | bypass" *ngIf="preview"></div>
+  <p *ngIf="!preview">
     <app-button theme="success" class="mt-4" (click)="save()">
       <ng-container *ngIf="!saving">Ok</ng-container>
       <ng-container *ngIf="saving"><app-spinner></app-spinner></ng-container>
