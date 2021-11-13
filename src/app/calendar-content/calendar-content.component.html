@@ -3,7 +3,7 @@
     class="day"
     *ngFor="let day of days"
     (click)="click(day)"
-    class="rounded mb-6 mr-6 flex p-6 bg-opacity-30 relative cursor-pointer border border-opacity-30"
+    class="rounded mb-6 mx-3 flex p-6 bg-opacity-30 relative cursor-pointer border border-opacity-30"
     [class.cursor-pointer]="this.editing || day.available"
     [class.bg-white]="day.available"
     [class.hover:bg-gray-100]="this.editing || day.available"
