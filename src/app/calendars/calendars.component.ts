@@ -5,7 +5,7 @@ import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Database, equalTo, listVal, orderByChild, query, ref } from '@angular/fire/database';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AddCalendarDialogComponent } from '../add-calendar-dialog/add-calendar-dialog.component';
 import { Calendar } from '../calendar';
@@ -18,6 +18,7 @@ export class CalendarsComponent {
   calendars: Observable<Calendar[] | null> | null = null;
   user: User | null = null;
   loading = true;
+  calendarSubscription?: Subscription;
 
   constructor(
     private auth: Auth,
@@ -31,10 +32,20 @@ export class CalendarsComponent {
       user(this.auth).subscribe((user) => {
         if (!user) {
           this.router.navigate(['/']);
+        } else {
+          this.user = user;
+          const calendarListRef = query(ref(this.db, '/calendars'), orderByChild('author'), equalTo(this.user?.uid ?? ''));
+          /*
+           ** RxFire has a very bad error management (at least for realtime database),
+           ** so we need to be able to cancel the subscription when we logout to avoid a permission error that we wouldn't be able to catch...
+           */
+          this.calendarSubscription?.unsubscribe();
+          this.calendarSubscription = listVal<Calendar>(calendarListRef, { keyField: 'key' })
+            .pipe(tap(() => (this.loading = false)))
+            .subscribe((data) => {
+              this.calendars = of(data);
+            });
         }
-        this.user = user;
-        const calendarListRef = query(ref(this.db, '/calendars'), orderByChild('author'), equalTo(this.user?.uid ?? ''));
-        this.calendars = listVal<Calendar>(calendarListRef, { keyField: 'key' }).pipe(tap(() => (this.loading = false)));
       });
     }
   }
@@ -49,6 +60,7 @@ export class CalendarsComponent {
 
   async logout() {
     logEvent(this.analytics, 'Logout');
+    this.calendarSubscription?.unsubscribe();
     await signOut(this.auth);
     this.router.navigate(['']);
   }
