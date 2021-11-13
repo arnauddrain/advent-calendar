@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Database, objectVal, ref } from '@angular/fire/database';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Calendar } from '../calendar';
 
 import { DayDialogComponent } from '../day-dialog/day-dialog.component';
-import { FileService } from '../file.service';
 
 @Component({
   selector: 'app-calendar',
@@ -18,16 +17,14 @@ export class CalendarComponent {
   uid: string;
   demo = false;
 
-  constructor(public db: AngularFireDatabase, private route: ActivatedRoute, private dialog: MatDialog, private fileService: FileService) {
+  constructor(public db: Database, private route: ActivatedRoute, private dialog: MatDialog) {
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
-    this.db
-      .object<Calendar>('calendars/' + this.uid)
-      .valueChanges()
-      .subscribe((val: Calendar | null) => {
-        this.loading = false;
-        this.calendar = val;
-        this.demo = val?.demo ?? false;
-      });
+    const calendarRef = ref(this.db, 'calendars/' + this.uid);
+    objectVal<Calendar>(calendarRef).subscribe((val) => {
+      this.loading = false;
+      this.calendar = val;
+      this.demo = val?.demo ?? false;
+    });
   }
 
   open(index: number) {

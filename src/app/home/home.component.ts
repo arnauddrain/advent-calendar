@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Analytics, logEvent } from '@angular/fire/analytics';
+import { Auth, user, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import firebase from 'firebase/compat/app';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 
@@ -12,13 +11,8 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  constructor(
-    private auth: AngularFireAuth,
-    private bottomSheet: MatBottomSheet,
-    private analytics: AngularFireAnalytics,
-    private router: Router
-  ) {
-    this.auth.user.subscribe((user) => {
+  constructor(private auth: Auth, private bottomSheet: MatBottomSheet, private analytics: Analytics, private router: Router) {
+    user(this.auth).subscribe((user) => {
       if (user) {
         this.router.navigate(['calendars']);
       }
@@ -26,25 +20,27 @@ export class HomeComponent {
   }
 
   async login() {
-    this.analytics.logEvent('Login');
-    this.analytics.logEvent('Login via Google');
-    await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    logEvent(this.analytics, 'Login');
+    logEvent(this.analytics, 'Login via Google');
+    await signInWithPopup(this.auth, new GoogleAuthProvider());
     this.router.navigate(['calendars']);
   }
 
   async fbLogin() {
-    this.analytics.logEvent('Login');
-    this.analytics.logEvent('Login via Facebook');
+    logEvent(this.analytics, 'Login');
+    logEvent(this.analytics, 'Login via Facebook');
     try {
-      await this.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+      await signInWithPopup(this.auth, new FacebookAuthProvider());
     } catch (e: any) {
       if (e.code === 'auth/account-exists-with-different-credential') {
-        this.analytics.logEvent('Error with login via Facebook');
+        logEvent(this.analytics, 'Error with login via Facebook');
         this.bottomSheet.open(BottomSheetComponent, {
           data: {
             text: 'Cet email est déjà associé à un autre compte, essayez de vous connecter avec Google'
           }
         });
+      } else {
+        throw e;
       }
       return;
     }

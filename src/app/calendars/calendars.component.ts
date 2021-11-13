@@ -1,45 +1,40 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Auth, signOut, user, User } from '@angular/fire/auth';
+import { Analytics, logEvent } from '@angular/fire/analytics';
+import { Database, equalTo, listVal, orderByChild, query, ref } from '@angular/fire/database';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { AddCalendarDialogComponent } from '../add-calendar-dialog/add-calendar-dialog.component';
+import { Calendar } from '../calendar';
 
 @Component({
   selector: 'app-calendars',
   templateUrl: './calendars.component.html'
 })
 export class CalendarsComponent {
-  calendars: Observable<any[]> | null = null;
-  user: firebase.User | null = null;
+  calendars: Observable<Calendar[] | null> | null = null;
+  user: User | null = null;
   loading = true;
 
   constructor(
-    private auth: AngularFireAuth,
-    private db: AngularFireDatabase,
-    private analytics: AngularFireAnalytics,
+    private auth: Auth,
+    private db: Database,
+    private analytics: Analytics,
     private router: Router,
     private dialog: MatDialog,
     @Inject(PLATFORM_ID) platformId: string
   ) {
     if (isPlatformBrowser(platformId)) {
-      auth.user.subscribe((user) => {
+      user(this.auth).subscribe((user) => {
         if (!user) {
           this.router.navigate(['/']);
         }
         this.user = user;
-        this.calendars = this.db
-          .list('/calendars', (ref) => ref.orderByChild('author').equalTo(this.user?.uid ?? ''))
-          .snapshotChanges()
-          .pipe(
-            tap(() => (this.loading = false)),
-            map((changes) => changes.map((c) => ({ key: c.payload.key, value: c.payload.val() })))
-          );
+        const calendarListRef = query(ref(this.db, '/calendars'), orderByChild('author'), equalTo(this.user?.uid ?? ''));
+        this.calendars = listVal<Calendar>(calendarListRef, { keyField: 'key' }).pipe(tap(() => (this.loading = false)));
       });
     }
   }
@@ -53,8 +48,8 @@ export class CalendarsComponent {
   }
 
   async logout() {
-    this.analytics.logEvent('Logout');
-    await this.auth.signOut();
+    logEvent(this.analytics, 'Logout');
+    await signOut(this.auth);
     this.router.navigate(['']);
   }
 }

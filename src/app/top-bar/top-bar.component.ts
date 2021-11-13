@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { Analytics, logEvent } from '@angular/fire/analytics';
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html'
 })
 export class TopBarComponent {
-  constructor(private analytics: AngularFireAnalytics) {}
+  constructor(private analytics: Analytics) {}
 
   donationEvent() {
-    this.analytics.logEvent('Click on donation');
+    logEvent(this.analytics, 'Click on donation');
   }
 
   contactEvent() {
-    this.analytics.logEvent('Click on contact');
+    logEvent(this.analytics, 'Click on contact');
   }
 }

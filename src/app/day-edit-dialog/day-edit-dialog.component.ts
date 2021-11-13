@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+import { Analytics, logEvent } from '@angular/fire/analytics';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class DayEditDialogComponent {
     public dialogRef: MatDialogRef<DayEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { filename: string },
     private fileService: FileService,
-    private analytics: AngularFireAnalytics
+    private analytics: Analytics
   ) {
     this.loading = true;
     this.filename = data.filename;
@@ -41,7 +41,7 @@ export class DayEditDialogComponent {
       return;
     }
     this.saving = true;
-    this.analytics.logEvent('Save day');
+    logEvent(this.analytics, 'Save day');
     await this.fileService.upload(this.filename, this.text);
     this.dialogRef.close(this.text);
     this.saving = false;

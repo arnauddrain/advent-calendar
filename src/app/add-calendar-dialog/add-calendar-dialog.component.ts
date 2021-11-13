@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { User } from '@angular/fire/auth';
+import { Analytics, logEvent } from '@angular/fire/analytics';
+import { Database, push, ref } from '@angular/fire/database';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-add-calendar-dialog',
@@ -10,13 +10,13 @@ import firebase from 'firebase/compat/app';
 })
 export class AddCalendarDialogComponent {
   name: string = '';
-  user: firebase.User;
+  user: User;
   savingCalendar = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { user: firebase.User },
-    private analytics: AngularFireAnalytics,
-    private db: AngularFireDatabase,
+    @Inject(MAT_DIALOG_DATA) public data: { user: User },
+    private analytics: Analytics,
+    private db: Database,
     public dialogRef: MatDialogRef<AddCalendarDialogComponent>
   ) {
     this.user = data.user;
@@ -24,9 +24,10 @@ export class AddCalendarDialogComponent {
 
   async saveCalendar() {
     if (this.user && this.name && !this.savingCalendar) {
-      this.analytics.logEvent('Create calendar');
+      logEvent(this.analytics, 'Create calendar');
       this.savingCalendar = true;
-      await this.db.list('/calendars').push({
+      const calendarListRef = ref(this.db, '/calendars');
+      await push(calendarListRef, {
         name: this.name,
         author: this.user.uid,
         startDate: '2021-11-30T23:00:00.000Z',

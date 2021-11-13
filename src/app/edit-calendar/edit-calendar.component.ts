@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import firebase from 'firebase/compat/app';
+import { Analytics, logEvent } from '@angular/fire/analytics';
+import { Database, objectVal, ref, remove, set } from '@angular/fire/database';
+import { Auth, user, User } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,40 +22,38 @@ export class EditCalendarComponent implements OnInit {
   calendar: Calendar | null = null;
   uid: string = '';
   editing = false;
-  user: firebase.User | null = null;
+  user: User | null = null;
 
   constructor(
-    private auth: AngularFireAuth,
-    public db: AngularFireDatabase,
+    private auth: Auth,
+    public db: Database,
     private route: ActivatedRoute,
     private router: Router,
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
-    private analytics: AngularFireAnalytics,
+    private analytics: Analytics,
     @Inject(PLATFORM_ID) platformId: string
   ) {
     if (isPlatformBrowser(platformId)) {
       this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
-      this.auth.user.subscribe((user) => {
+      user(this.auth).subscribe((user) => {
         this.user = user;
         if (!user || (this.calendar && user.uid !== this.calendar.author)) {
           this.router.navigate(['/']);
         }
       });
-      this.db
-        .object<Calendar>('calendars/' + this.uid)
-        .valueChanges()
-        .subscribe((val: Calendar | null) => {
-          this.calendar = val;
-          if (this.user && this.user.uid !== this.calendar?.author) {
-            this.router.navigate(['/calendars']);
-          }
-        });
+      const calendarRef = ref(this.db, 'calendars/' + this.uid);
+      objectVal<Calendar>(calendarRef).subscribe((val) => {
+        this.calendar = val;
+        if (this.user && this.user.uid !== this.calendar?.author) {
+          this.router.navigate(['/calendars']);
+        }
+      });
     }
   }
 
   ngOnInit() {
-    this.analytics.logEvent('Edit calendar');
+    logEvent(this.analytics, 'Edit calendar');
   }
 
   get url(): string {
@@ -64,7 +61,7 @@ export class EditCalendarComponent implements OnInit {
   }
 
   async settings() {
-    this.analytics.logEvent('Open settings');
+    logEvent(this.analytics, 'Open settings');
     this.dialog
       .open(SettingsDialogComponent, {
         data: {
@@ -74,15 +71,15 @@ export class EditCalendarComponent implements OnInit {
       .afterClosed()
       .subscribe((dates) => {
         if (dates?.startDate && dates?.endDate) {
-          this.analytics.logEvent('Save settings');
-          this.db.object('calendars/' + this.uid + '/startDate').set(dates.startDate.toISOString());
-          this.db.object('calendars/' + this.uid + '/endDate').set(dates.endDate.toISOString());
+          logEvent(this.analytics, 'Save settings');
+          set(ref(this.db, 'calendars/' + this.uid + '/startDate'), dates.startDate.toISOString());
+          set(ref(this.db, 'calendars/' + this.uid + '/endDate'), dates.endDate.toISOString());
         }
       });
   }
 
   async open(index: number) {
-    this.analytics.logEvent('Open day');
+    logEvent(this.analytics, 'Open day');
     const filename = this.calendar?.author + '/calendars/' + this.uid + '/' + index + '.html';
     this.dialog.open(DayEditDialogComponent, {
       maxWidth: '95vw',
@@ -93,7 +90,7 @@ export class EditCalendarComponent implements OnInit {
   }
 
   share() {
-    this.analytics.logEvent('Share');
+    logEvent(this.analytics, 'Share');
     this.bottomSheet.open(BottomSheetComponent, {
       data: {
         text: 'Le lien a été copié dans le presse-papier !',
@@ -104,23 +101,25 @@ export class EditCalendarComponent implements OnInit {
 
   edit() {
     if (this.editing && this.calendar) {
-      this.analytics.logEvent('Edit calendar name');
-      this.db.object('calendars/' + this.uid + '/name').set(this.calendar.name);
+      logEvent(this.analytics, 'Edit calendar name');
+      const calendarRef = ref(this.db, 'calendars/' + this.uid + '/name');
+      set(calendarRef, this.calendar.name);
     }
     this.editing = !this.editing;
   }
 
   deleteCalendar() {
-    this.analytics.logEvent('Delete calendar');
+    logEvent(this.analytics, 'Delete calendar');
     this.dialog
       .open(DeleteCalendarDialogComponent, {})
       .afterClosed()
       .subscribe(async (result) => {
         if (result) {
-          await this.db.object('calendars/' + this.uid).remove();
+          const calendarRef = ref(this.db, 'calendars/' + this.uid);
+          await remove(calendarRef);
           this.bottomSheet.open(BottomSheetComponent, {
             data: {
-              text: `Le calendrier a bien été supprimé. En cas d'erreur vous pouvez joindre l'administrateur via la page Facebook (lien en haut à droite)`
+              text: `Le calendrier a bien été supprimé. En cas d'erreur vous pouvez me joindre via la page Facebook (lien en haut à droite)`
             }
           });
           this.router.navigate(['/calendars']);
