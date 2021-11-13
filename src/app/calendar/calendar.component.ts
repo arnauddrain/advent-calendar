@@ -34,6 +34,7 @@ export class CalendarComponent {
     if (this.calendar) {
       const filename = this.calendar.author + '/calendars/' + this.uid + '/' + index + '.html';
       this.dialog.open(DayDialogComponent, {
+        maxWidth: '95vw',
         data: {
           filename: filename
         }

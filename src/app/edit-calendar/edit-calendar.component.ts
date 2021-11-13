@@ -85,6 +85,7 @@ export class EditCalendarComponent implements OnInit {
     this.analytics.logEvent('Open day');
     const filename = this.calendar?.author + '/calendars/' + this.uid + '/' + index + '.html';
     this.dialog.open(DayEditDialogComponent, {
+      maxWidth: '95vw',
       data: {
         filename: filename
       }
