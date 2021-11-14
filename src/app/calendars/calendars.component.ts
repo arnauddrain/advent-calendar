@@ -34,28 +34,37 @@ export class CalendarsComponent {
           this.router.navigate(['/']);
         } else {
           this.user = user;
-          const calendarListRef = query(ref(this.db, '/calendars'), orderByChild('author'), equalTo(this.user?.uid ?? ''));
-          /*
-           ** RxFire has a very bad error management (at least for realtime database),
-           ** so we need to be able to cancel the subscription when we logout to avoid a permission error that we wouldn't be able to catch...
-           */
-          this.calendarSubscription?.unsubscribe();
-          this.calendarSubscription = listVal<Calendar>(calendarListRef, { keyField: 'key' })
-            .pipe(tap(() => (this.loading = false)))
-            .subscribe((data) => {
-              this.calendars = of(data);
-            });
+          this.subscribeToCalendars();
         }
       });
     }
   }
 
+  private subscribeToCalendars() {
+    const calendarListRef = query(ref(this.db, '/calendars'), orderByChild('author'), equalTo(this.user?.uid ?? ''));
+    /*
+     ** RxFire has a very bad error management (at least for realtime database),
+     ** so we need to be able to cancel the subscription when we logout to avoid a permission error that we wouldn't be able to catch...
+     */
+    this.calendarSubscription?.unsubscribe();
+    this.calendarSubscription = listVal<Calendar>(calendarListRef, { keyField: 'key' })
+      .pipe(tap(() => (this.loading = false)))
+      .subscribe((data) => {
+        this.calendars = of(data);
+      });
+  }
+
   addCalendar() {
-    this.dialog.open(AddCalendarDialogComponent, {
-      data: {
-        user: this.user
-      }
-    });
+    this.dialog
+      .open(AddCalendarDialogComponent, {
+        data: {
+          user: this.user
+        }
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.subscribeToCalendars();
+      });
   }
 
   async logout() {
