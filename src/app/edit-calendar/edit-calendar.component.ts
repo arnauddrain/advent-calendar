@@ -21,7 +21,6 @@ import { Calendar } from '../calendar';
 export class EditCalendarComponent implements OnInit {
   calendar: Calendar | null = null;
   uid: string = '';
-  editing = false;
   user: User | null = null;
 
   constructor(
@@ -69,11 +68,16 @@ export class EditCalendarComponent implements OnInit {
         }
       })
       .afterClosed()
-      .subscribe((dates) => {
-        if (dates?.startDate && dates?.endDate) {
-          logEvent(this.analytics, 'Save settings');
-          set(ref(this.db, 'calendars/' + this.uid + '/startDate'), dates.startDate.toISOString());
-          set(ref(this.db, 'calendars/' + this.uid + '/endDate'), dates.endDate.toISOString());
+      .subscribe((data) => {
+        logEvent(this.analytics, 'Save settings');
+        if (data?.startDate) {
+          set(ref(this.db, 'calendars/' + this.uid + '/startDate'), data.startDate.toISOString());
+        }
+        if (data?.endDate) {
+          set(ref(this.db, 'calendars/' + this.uid + '/endDate'), data.endDate.toISOString());
+        }
+        if (data?.name) {
+          set(ref(this.db, 'calendars/' + this.uid + '/name'), data.name);
         }
       });
   }
@@ -97,15 +101,6 @@ export class EditCalendarComponent implements OnInit {
         link: this.url
       }
     });
-  }
-
-  edit() {
-    if (this.editing && this.calendar) {
-      logEvent(this.analytics, 'Edit calendar name');
-      const calendarRef = ref(this.db, 'calendars/' + this.uid + '/name');
-      set(calendarRef, this.calendar.name);
-    }
-    this.editing = !this.editing;
   }
 
   deleteCalendar() {

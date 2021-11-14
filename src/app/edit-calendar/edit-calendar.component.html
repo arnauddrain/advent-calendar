@@ -2,12 +2,8 @@
 <app-spinner *ngIf="!calendar"></app-spinner>
 <ng-container *ngIf="calendar">
   <h1>
-    <div>
-      <span *ngIf="!editing">{{ calendar.name }}</span>
-      <mat-form-field *ngIf="editing">
-        <input matInput type="text" [(ngModel)]="calendar.name" />
-      </mat-form-field>
-      <mat-icon (click)="edit()">edit</mat-icon>
+    <div class="text-3xl">
+      {{ calendar.name }}
     </div>
     <div class="flex">
       <app-button matTooltip="Partager" (click)="share()" [cdkCopyToClipboard]="url">

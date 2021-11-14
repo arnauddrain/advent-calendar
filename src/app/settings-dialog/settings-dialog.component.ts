@@ -10,8 +10,10 @@ import { Calendar } from '../calendar';
 export class SettingsDialogComponent {
   startDate: Date | null = null;
   endDate: Date | null = null;
+  name: string;
 
   constructor(public dialogRef: MatDialogRef<SettingsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { calendar: Calendar }) {
+    this.name = data.calendar.name;
     if (data.calendar.startDate) {
       this.startDate = new Date(data.calendar.startDate);
     }
@@ -22,6 +24,7 @@ export class SettingsDialogComponent {
 
   save() {
     this.dialogRef.close({
+      name: this.name,
       startDate: this.startDate,
       endDate: this.endDate
     });
