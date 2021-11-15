@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { MatInputModule } from '@angular/material/input';
@@ -73,6 +74,7 @@ import { BypassPipe } from './shared/bypass.pipe';
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     BrowserAnimationsModule,
     MatInputModule,

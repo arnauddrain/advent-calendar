@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Database, objectVal, ref, remove, set } from '@angular/fire/database';
+import { Firestore, updateDoc, doc, deleteDoc, docData } from '@angular/fire/firestore';
+import { DocumentReference } from 'rxfire/firestore/interfaces';
 import { Auth, user, User } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,6 +33,7 @@ export class EditCalendarComponent implements OnInit {
     private bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
     private analytics: Analytics,
+    private afs: Firestore,
     @Inject(PLATFORM_ID) platformId: string
   ) {
     if (isPlatformBrowser(platformId)) {
@@ -41,6 +44,8 @@ export class EditCalendarComponent implements OnInit {
           this.router.navigate(['/']);
         }
       });
+
+      // temporary code
       const calendarRef = ref(this.db, 'calendars/' + this.uid);
       objectVal<Calendar>(calendarRef).subscribe((val) => {
         this.calendar = val;
@@ -48,6 +53,15 @@ export class EditCalendarComponent implements OnInit {
           this.router.navigate(['/calendars']);
         }
       });
+
+      // Future code
+      /*const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
+      docData<Calendar>(calendarDoc as DocumentReference<Calendar>).subscribe((val) => {
+        this.calendar = val;
+        if (this.user && this.user.uid !== this.calendar?.author) {
+          this.router.navigate(['/calendars']);
+        }
+      });*/
     }
   }
 
@@ -71,13 +85,22 @@ export class EditCalendarComponent implements OnInit {
       .subscribe((data) => {
         logEvent(this.analytics, 'Save settings');
         if (data?.startDate) {
+          // Temporary code
           set(ref(this.db, 'calendars/' + this.uid + '/startDate'), data.startDate.toISOString());
+
+          updateDoc(doc(this.afs, 'calendars/' + this.uid), { startDate: data.startDate.toISOString() });
         }
         if (data?.endDate) {
+          // Temporary code
           set(ref(this.db, 'calendars/' + this.uid + '/endDate'), data.endDate.toISOString());
+
+          updateDoc(doc(this.afs, 'calendars/' + this.uid), { endDate: data.endDate.toISOString() });
         }
         if (data?.name) {
+          // Temporary code
           set(ref(this.db, 'calendars/' + this.uid + '/name'), data.name);
+
+          updateDoc(doc(this.afs, 'calendars/' + this.uid), { name: data.name });
         }
       });
   }
@@ -112,6 +135,7 @@ export class EditCalendarComponent implements OnInit {
         if (result) {
           const calendarRef = ref(this.db, 'calendars/' + this.uid);
           await remove(calendarRef);
+          await deleteDoc(doc(this.afs, 'calendars/' + this.uid));
           this.bottomSheet.open(BottomSheetComponent, {
             data: {
               text: `Le calendrier a bien été supprimé. En cas d'erreur vous pouvez me joindre via la page Facebook (lien en haut à droite)`

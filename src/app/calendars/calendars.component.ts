@@ -2,7 +2,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Auth, signOut, user, User } from '@angular/fire/auth';
 import { Analytics, logEvent } from '@angular/fire/analytics';
-import { Database, equalTo, listVal, orderByChild, query, ref } from '@angular/fire/database';
+import { Database, equalTo, listVal, orderByChild, query as dbQuery, ref } from '@angular/fire/database';
+import { Firestore, collection, collectionData, query, where, Query } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
@@ -23,6 +24,7 @@ export class CalendarsComponent {
   constructor(
     private auth: Auth,
     private db: Database,
+    private afs: Firestore,
     private analytics: Analytics,
     private router: Router,
     private dialog: MatDialog,
@@ -41,7 +43,15 @@ export class CalendarsComponent {
   }
 
   private subscribeToCalendars() {
-    const calendarListRef = query(ref(this.db, '/calendars'), orderByChild('author'), equalTo(this.user?.uid ?? ''));
+    // futur code
+    /*const calendarQuery = query<Calendar>(
+      collection(this.afs, '/calendars') as Query<Calendar>,
+      where('author', '==', this.user?.uid ?? '')
+    );
+    this.calendars = collectionData<Calendar>(calendarQuery, { idField: 'key' }).pipe(tap(() => (this.loading = false)));*/
+
+    // temporary code
+    const calendarListRef = dbQuery(ref(this.db, '/calendars'), orderByChild('author'), equalTo(this.user?.uid ?? ''));
     /*
      ** RxFire has a very bad error management (at least for realtime database),
      ** so we need to be able to cancel the subscription when we logout to avoid a permission error that we wouldn't be able to catch...
@@ -61,6 +71,7 @@ export class CalendarsComponent {
           user: this.user
         }
       })
+      // temporary code
       .afterClosed()
       .subscribe(() => {
         this.subscribeToCalendars();
@@ -69,7 +80,10 @@ export class CalendarsComponent {
 
   async logout() {
     logEvent(this.analytics, 'Logout');
+
+    // temporary code
     this.calendarSubscription?.unsubscribe();
+
     await signOut(this.auth);
     this.router.navigate(['']);
   }
