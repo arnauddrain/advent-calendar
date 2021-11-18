@@ -1,7 +1,7 @@
 <app-top-bar></app-top-bar>
 <app-spinner *ngIf="!calendar"></app-spinner>
 <ng-container *ngIf="calendar">
-  <h1>
+  <h1 class="flex flex-wrap">
     <div class="text-3xl">
       {{ calendar.name }}
     </div>
