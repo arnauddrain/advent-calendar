@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Database, objectVal, ref } from '@angular/fire/database';
 import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { DocumentReference } from 'rxfire/firestore/interfaces';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,24 +18,15 @@ export class CalendarComponent {
   uid: string;
   demo = false;
 
-  constructor(public db: Database, private route: ActivatedRoute, private dialog: MatDialog, private afs: Firestore) {
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, private afs: Firestore) {
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
 
-    // temporary code
-    const calendarRef = ref(this.db, 'calendars/' + this.uid);
-    objectVal<Calendar>(calendarRef).subscribe((val) => {
+    const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
+    docData<Calendar>(calendarDoc as DocumentReference<Calendar>).subscribe((val) => {
       this.loading = false;
       this.calendar = val;
       this.demo = val?.demo ?? false;
     });
-
-    // Future code
-    // const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
-    // docData<Calendar>(calendarDoc as DocumentReference<Calendar>).subscribe((val) => {
-    //   this.loading = false;
-    //   this.calendar = val;
-    //   this.demo = val?.demo ?? false;
-    // });
   }
 
   open(index: number) {

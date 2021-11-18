@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Analytics, logEvent } from '@angular/fire/analytics';
-import { Database, objectVal, ref, remove, set } from '@angular/fire/database';
 import { Firestore, updateDoc, doc, deleteDoc, docData } from '@angular/fire/firestore';
 import { DocumentReference } from 'rxfire/firestore/interfaces';
 import { Auth, user, User } from '@angular/fire/auth';
@@ -27,7 +26,6 @@ export class EditCalendarComponent implements OnInit {
 
   constructor(
     private auth: Auth,
-    public db: Database,
     private route: ActivatedRoute,
     private router: Router,
     private bottomSheet: MatBottomSheet,
@@ -45,23 +43,13 @@ export class EditCalendarComponent implements OnInit {
         }
       });
 
-      // temporary code
-      const calendarRef = ref(this.db, 'calendars/' + this.uid);
-      objectVal<Calendar>(calendarRef).subscribe((val) => {
-        this.calendar = val;
-        if (this.user && this.user.uid !== this.calendar?.author) {
-          this.router.navigate(['/calendars']);
-        }
-      });
-
-      // Future code
-      /*const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
+      const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
       docData<Calendar>(calendarDoc as DocumentReference<Calendar>).subscribe((val) => {
         this.calendar = val;
         if (this.user && this.user.uid !== this.calendar?.author) {
           this.router.navigate(['/calendars']);
         }
-      });*/
+      });
     }
   }
 
@@ -85,21 +73,12 @@ export class EditCalendarComponent implements OnInit {
       .subscribe((data) => {
         logEvent(this.analytics, 'Save settings');
         if (data?.startDate) {
-          // Temporary code
-          set(ref(this.db, 'calendars/' + this.uid + '/startDate'), data.startDate.toISOString());
-
           updateDoc(doc(this.afs, 'calendars/' + this.uid), { startDate: data.startDate.toISOString() });
         }
         if (data?.endDate) {
-          // Temporary code
-          set(ref(this.db, 'calendars/' + this.uid + '/endDate'), data.endDate.toISOString());
-
           updateDoc(doc(this.afs, 'calendars/' + this.uid), { endDate: data.endDate.toISOString() });
         }
         if (data?.name) {
-          // Temporary code
-          set(ref(this.db, 'calendars/' + this.uid + '/name'), data.name);
-
           updateDoc(doc(this.afs, 'calendars/' + this.uid), { name: data.name });
         }
       });
@@ -133,8 +112,6 @@ export class EditCalendarComponent implements OnInit {
       .afterClosed()
       .subscribe(async (result) => {
         if (result) {
-          const calendarRef = ref(this.db, 'calendars/' + this.uid);
-          await remove(calendarRef);
           await deleteDoc(doc(this.afs, 'calendars/' + this.uid));
           this.bottomSheet.open(BottomSheetComponent, {
             data: {
