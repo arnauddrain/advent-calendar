@@ -1,14 +1,15 @@
-<a
+<button
   class="flex h-11 w-60 items-center rounded font-button font-bold cursor-pointer"
   [ngClass]="{ 'bg-blue': theme === 'blue', 'bg-white': theme === 'white', 'bg-black': theme === 'black' }"
+  [disabled]="disabled"
 >
   <span class="bg-white p-2 m-1 rounded" [ngClass]="{ 'bg-white': theme === 'blue' }" *ngIf="img"
     ><img [src]="img" width="24" height="24"
   /></span>
   <span
-    class="text-sm text-center flex-1"
+    class="text-sm flex-1 flex justify-center"
     [ngClass]="{ 'text-white': ['blue', 'transparent', 'black'].includes(theme), 'text-black': theme === 'white' }"
   >
     <ng-content></ng-content>
   </span>
-</a>
+</button>

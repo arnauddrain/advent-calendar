@@ -12,8 +12,11 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
+  loading = true;
+
   constructor(private auth: Auth, private bottomSheet: MatBottomSheet, private analytics: Analytics, private router: Router) {
     user(this.auth).subscribe((user) => {
+      this.loading = false;
       if (user) {
         this.router.navigate(['calendars']);
       }
@@ -21,8 +24,14 @@ export class HomeComponent {
   }
 
   async loginViaRedirect(provider: typeof GoogleAuthProvider | typeof FacebookAuthProvider) {
-    await signInWithRedirect(this.auth, new provider());
-    this.router.navigate(['calendars']);
+    this.loading = true;
+    try {
+      await signInWithRedirect(this.auth, new provider());
+      this.router.navigate(['calendars']);
+    } catch (e: any) {
+      this.loading = false;
+      throw e;
+    }
   }
 
   private checkForCommonError(e: any, provider: typeof GoogleAuthProvider | typeof FacebookAuthProvider) {
@@ -34,12 +43,14 @@ export class HomeComponent {
   }
 
   async login() {
+    this.loading = true;
     logEvent(this.analytics, 'Login');
     logEvent(this.analytics, 'Login via Google');
     try {
       await signInWithPopup(this.auth, new GoogleAuthProvider());
       this.router.navigate(['calendars']);
     } catch (e: any) {
+      this.loading = false;
       if (this.checkForCommonError(e, GoogleAuthProvider)) {
         return;
       }
@@ -48,12 +59,14 @@ export class HomeComponent {
   }
 
   async fbLogin() {
+    this.loading = true;
     logEvent(this.analytics, 'Login');
     logEvent(this.analytics, 'Login via Facebook');
     try {
       await signInWithPopup(this.auth, new FacebookAuthProvider());
       this.router.navigate(['calendars']);
     } catch (e: any) {
+      this.loading = false;
       if (this.checkForCommonError(e, FacebookAuthProvider)) {
         return;
       }

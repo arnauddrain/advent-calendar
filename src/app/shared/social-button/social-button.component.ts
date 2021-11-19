@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class SocialButtonComponent {
   @Input() theme: 'white' | 'blue' | 'transparent' | 'black' = 'white';
   @Input() img?: string;
+  @Input() disabled = true;
 }
