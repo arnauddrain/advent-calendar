@@ -29,7 +29,8 @@ export class CalendarContentComponent implements OnChanges {
     }
     if (this.demo) {
       this.startDate = new Date();
-      this.startDate.setDate(this.startDate.getDate() - 10);
+      this.startDate.setDate(this.startDate.getDate() - 9);
+      this.startDate.setHours(0, 0, 0, 0);
       this.endDate = new Date(this.startDate);
       this.endDate.setDate(this.endDate.getDate() + 24);
     }
