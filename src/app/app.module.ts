@@ -95,6 +95,7 @@ import { BypassPipe } from './shared/bypass.pipe';
       modules: {
         ImageResize: true
       },
+      placeholder: 'Écrivez quelque chose...',
       suppressGlobalRegisterWarning: true
     })
   ],
