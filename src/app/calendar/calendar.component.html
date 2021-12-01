@@ -6,7 +6,10 @@
 </div>
 
 <app-spinner *ngIf="loading"></app-spinner>
-<p *ngIf="!loading && !calendar">Il y a un problème avec le lien, ce calendrier n'existe pas ou a été supprimé.</p>
+<p *ngIf="!loading && !calendar">
+  <app-spinner></app-spinner>
+  <!--Il y a un problème avec le lien, ce calendrier n'existe pas ou a été supprimé.-->
+</p>
 <ng-container *ngIf="calendar">
   <h1 class="text-3xl">
     {{ calendar.name }}
