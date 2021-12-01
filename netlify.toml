@@ -4,7 +4,7 @@
   command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && npm run prerender"
 
 [context.deploy-preview]
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && npm run prerender"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && npm run prerender --configuration=preview"
 
 [[redirects]]
   from = "https://ecalendrier.pvsc.fr/*"

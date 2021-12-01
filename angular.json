@@ -55,6 +55,33 @@
                 }
               ]
             },
+            "preview": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.preview.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            },
             "development": {
               "optimization": {
                 "scripts": false,
@@ -73,6 +100,9 @@
           "configurations": {
             "production": {
               "browserTarget": "calendar:build:production"
+            },
+            "preview": {
+              "browserTarget": "calendar:build:preview"
             }
           }
         },
@@ -128,6 +158,18 @@
               "sourceMap": true,
               "extractLicenses": true
             },
+            "preview": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.preview.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": true,
+              "extractLicenses": true
+            },
             "development": {
               "optimization": true
             }
@@ -144,6 +186,10 @@
             "production": {
               "browserTarget": "calendar:build:production",
               "serverTarget": "calendar:server:production"
+            },
+            "preview": {
+              "browserTarget": "calendar:build:preview",
+              "serverTarget": "calendar:server:preview"
             }
           },
           "defaultConfiguration": "development"
@@ -157,6 +203,10 @@
             "production": {
               "browserTarget": "calendar:build:production",
               "serverTarget": "calendar:server:production"
+            },
+            "preview": {
+              "browserTarget": "calendar:build:preview",
+              "serverTarget": "calendar:server:preview"
             },
             "development": {
               "browserTarget": "calendar:build:development",
