@@ -6,6 +6,9 @@
 [context.deploy-preview]
   command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && npm run prerender -- --configuration=preview"
 
+[context.deploy-preview.environment]
+  SENTRY_ENVIRONMENT = "preview"
+
 [[redirects]]
   from = "https://ecalendrier.pvsc.fr/*"
   to = "https://www.ecalendrier.net/:splat"
@@ -19,7 +22,7 @@
 
 [[redirects]]
   from = "/edit/*"
-  to = "/edit/:splat"
+  to = "/calendars"
   status = 200
 
 [[redirects]]
