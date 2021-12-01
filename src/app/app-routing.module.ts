@@ -17,6 +17,7 @@ const routes: Routes = [
     path: 'edit/:uid',
     component: EditCalendarComponent
   },
+  { path: 'preview', component: CalendarComponent },
   { path: ':uid', component: CalendarComponent },
   { path: '**', component: NotFoundComponent }
 ];
