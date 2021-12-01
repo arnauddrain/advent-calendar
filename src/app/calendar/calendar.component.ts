@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { DocumentReference } from 'rxfire/firestore/interfaces';
 import { MatDialog } from '@angular/material/dialog';
+import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Calendar } from '../calendar';
 
@@ -18,7 +19,8 @@ export class CalendarComponent {
   uid: string;
   demo = false;
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog, private afs: Firestore) {
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, private afs: Firestore, private meta: Meta) {
+    this.meta.updateTag({ name: 'description', content: "Calendrier de l'avent en ligne" });
     this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
 
     const calendarDoc = doc(this.afs, 'calendars/' + this.uid);

@@ -4,8 +4,9 @@ import { Auth, signOut, user, User } from '@angular/fire/auth';
 import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Firestore, collection, collectionData, query, where, Query } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
+import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AddCalendarDialogComponent } from '../add-calendar-dialog/add-calendar-dialog.component';
 import { Calendar } from '../calendar';
@@ -25,8 +26,14 @@ export class CalendarsComponent {
     private analytics: Analytics,
     private router: Router,
     private dialog: MatDialog,
-    @Inject(PLATFORM_ID) platformId: string
+    @Inject(PLATFORM_ID) platformId: string,
+    private meta: Meta
   ) {
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
+    });
     if (isPlatformBrowser(platformId)) {
       user(this.auth).subscribe((user) => {
         if (!user) {

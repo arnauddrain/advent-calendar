@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Auth, user, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { signInWithRedirect } from '@firebase/auth';
 
@@ -14,7 +15,18 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 export class HomeComponent {
   loading = true;
 
-  constructor(private auth: Auth, private bottomSheet: MatBottomSheet, private analytics: Analytics, private router: Router) {
+  constructor(
+    private auth: Auth,
+    private bottomSheet: MatBottomSheet,
+    private analytics: Analytics,
+    private router: Router,
+    private meta: Meta
+  ) {
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
+    });
     user(this.auth).subscribe((user) => {
       this.loading = false;
       if (user) {
