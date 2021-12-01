@@ -13,3 +13,7 @@ body {
   background-image: url('assets/bg.webp');
   color: white;
 }
+
+.mat-dialog-content {
+  max-height: initial !important;
+}

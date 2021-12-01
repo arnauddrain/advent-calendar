@@ -89,6 +89,7 @@ export class EditCalendarComponent implements OnInit {
     const filename = this.calendar?.author + '/calendars/' + this.uid + '/' + index + '.html';
     this.dialog.open(DayEditDialogComponent, {
       maxWidth: '95vw',
+      maxHeight: '80vh',
       data: {
         filename: filename
       }
