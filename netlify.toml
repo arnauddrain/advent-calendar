@@ -13,6 +13,16 @@
   force = true
 
 [[redirects]]
-  from = "/*"
+  from = "/calendars"
   to = "/calendars"
+  status = 200
+
+[[redirects]]
+  from = "/edit/*"
+  to = "/edit/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/preview"
   status = 200

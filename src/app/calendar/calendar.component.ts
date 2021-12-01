@@ -16,18 +16,22 @@ import { DayDialogComponent } from '../day-dialog/day-dialog.component';
 export class CalendarComponent {
   loading = true;
   calendar: Calendar | null = null;
-  uid: string;
+  uid?: string;
   demo = false;
 
   constructor(private route: ActivatedRoute, private dialog: MatDialog, private afs: Firestore, private meta: Meta) {
     this.meta.updateTag({ name: 'description', content: "Calendrier de l'avent en ligne" });
-    this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
-
-    const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
-    docData<Calendar>(calendarDoc as DocumentReference<Calendar>).subscribe((val) => {
-      this.loading = false;
-      this.calendar = val;
-      this.demo = val?.demo ?? false;
+    this.route.paramMap.subscribe((paramMap) => {
+      const uid = paramMap.get('uid');
+      if (uid) {
+        this.uid = uid;
+        const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
+        docData<Calendar>(calendarDoc as DocumentReference<Calendar>).subscribe((val) => {
+          this.loading = false;
+          this.calendar = val;
+          this.demo = val?.demo ?? false;
+        });
+      }
     });
   }
 
