@@ -17,3 +17,14 @@ body {
 .mat-dialog-content {
   max-height: initial !important;
 }
+
+.mat-dialog-content img,
+.mat-dialog-content svg,
+.mat-dialog-content video,
+.mat-dialog-content canvas,
+.mat-dialog-content audio,
+.mat-dialog-content iframe,
+.mat-dialog-content embed,
+.mat-dialog-content object {
+  display: inline-block;
+}
