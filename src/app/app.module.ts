@@ -16,11 +16,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill';
+import { MediaResize } from 'quill-media-resize';
 import * as Sentry from '@sentry/angular';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
-import ImageResize from 'quill-image-resize';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -88,12 +88,12 @@ import { BypassPipe } from './shared/bypass.pipe';
     QuillModule.forRoot({
       customModules: [
         {
-          implementation: ImageResize,
-          path: 'modules/ImageResize'
+          implementation: MediaResize,
+          path: 'modules/MediaResize'
         }
       ],
       modules: {
-        ImageResize: true
+        MediaResize: true
       },
       placeholder: 'Écrivez quelque chose...',
       suppressGlobalRegisterWarning: true
