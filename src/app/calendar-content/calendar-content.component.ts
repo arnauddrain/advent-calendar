@@ -12,7 +12,7 @@ interface Day {
   templateUrl: './calendar-content.component.html'
 })
 export class CalendarContentComponent implements OnChanges {
-  @Output() open = new EventEmitter<number>();
+  @Output() openContent = new EventEmitter<number>();
   @Input() editing: boolean = false;
   @Input() demo: boolean = false;
   @Input() calendar?: Calendar;
@@ -51,7 +51,7 @@ export class CalendarContentComponent implements OnChanges {
 
   click(day: Day) {
     if (this.editing || day.available) {
-      this.open.emit(day.index);
+      this.openContent.emit(day.index);
     }
   }
 }

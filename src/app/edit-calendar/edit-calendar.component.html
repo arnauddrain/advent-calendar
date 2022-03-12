@@ -14,7 +14,7 @@
       </app-button>
     </div>
   </h1>
-  <app-calendar-content (open)="open($event)" [editing]="true" [calendar]="calendar"></app-calendar-content>
+  <app-calendar-content (openContent)="open($event)" [editing]="true" [calendar]="calendar"></app-calendar-content>
   <p>
     <app-button theme="danger" (click)="deleteCalendar()"><mat-icon>delete</mat-icon> Supprimer le calendrier</app-button>
   </p>
