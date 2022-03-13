@@ -7,8 +7,6 @@ import { Theme } from '../theme';
   templateUrl: 'button.component.html'
 })
 export class ButtonComponent {
-  @HostBinding('attr.class') class = 'flex';
-
   @Input() theme: Theme = 'transparent';
   @Input() type = '';
   @Input() size: Size = 'normal';
