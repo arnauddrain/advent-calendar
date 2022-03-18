@@ -1,9 +1,5 @@
 module.exports = {
-  purge: {
-    enabled: true,
-    content: ['./src/**/*.{html,ts}']
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
       maxWidth: {
@@ -23,9 +19,6 @@ module.exports = {
         button: 'Roboto'
       }
     }
-  },
-  variants: {
-    extend: {}
   },
   plugins: []
 };
