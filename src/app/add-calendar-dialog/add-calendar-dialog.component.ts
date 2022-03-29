@@ -29,6 +29,7 @@ export class AddCalendarDialogComponent {
       const calendarData = {
         name: this.name,
         author: this.user.uid,
+        createdAt: Date.now(),
         startDate: '2021-11-30T23:00:00.000Z',
         endDate: '2021-12-24T23:00:00.000Z'
       };
