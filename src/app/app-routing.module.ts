@@ -6,12 +6,17 @@ import { CalendarsComponent } from './calendars/calendars.component';
 import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'calendars',
     component: CalendarsComponent
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent
   },
   {
     path: 'edit/:uid',

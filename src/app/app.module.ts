@@ -43,6 +43,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SocialButtonComponent } from './shared/social-button/social-button.component';
 import { BypassPipe } from './shared/bypass.pipe';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { BypassPipe } from './shared/bypass.pipe';
     SpinnerComponent,
     TopBarComponent,
     SocialButtonComponent,
+    PrivacyComponent,
     BypassPipe
   ],
   imports: [

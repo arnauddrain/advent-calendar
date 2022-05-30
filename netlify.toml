@@ -21,6 +21,11 @@
   status = 200
 
 [[redirects]]
+  from = "/privacy"
+  to = "/privacy"
+  status = 200
+
+[[redirects]]
   from = "/edit/*"
   to = "/calendars"
   status = 200
