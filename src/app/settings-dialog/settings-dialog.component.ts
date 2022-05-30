@@ -4,8 +4,7 @@ import { Calendar } from '../calendar';
 
 @Component({
   selector: 'app-settings-dialog',
-  templateUrl: './settings-dialog.component.html',
-  styleUrls: ['./settings-dialog.component.css']
+  templateUrl: './settings-dialog.component.html'
 })
 export class SettingsDialogComponent {
   startDate: Date | null = null;
