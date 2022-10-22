@@ -122,13 +122,6 @@
           "builder": "@angular/fire:deploy",
           "options": {}
         },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/calendar/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
-          },
           "configurations": {
             "production": {
               "outputHashing": "media",
@@ -156,45 +149,6 @@
             },
             "development": {
               "optimization": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "calendar:build:development",
-              "serverTarget": "calendar:server:development"
-            },
-            "production": {
-              "browserTarget": "calendar:build:production",
-              "serverTarget": "calendar:server:production"
-            },
-            "preview": {
-              "browserTarget": "calendar:build:preview",
-              "serverTarget": "calendar:server:preview"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "routes": ["/"]
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "calendar:build:production",
-              "serverTarget": "calendar:server:production"
-            },
-            "preview": {
-              "browserTarget": "calendar:build:preview",
-              "serverTarget": "calendar:server:preview"
-            },
-            "development": {
-              "browserTarget": "calendar:build:development",
-              "serverTarget": "calendar:server:development"
             }
           },
           "defaultConfiguration": "production"

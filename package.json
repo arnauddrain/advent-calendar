@@ -6,11 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "dev:ssr": "ng run calendar:serve-ssr",
-    "serve:ssr": "node dist/calendar/server/main.js",
-    "build:ssr": "ng build && ng run calendar:server",
-    "prerender": "ng run calendar:prerender"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +22,6 @@
     "@angular/platform-browser-dynamic": "14.0.1",
     "@angular/platform-server": "14.0.1",
     "@angular/router": "14.0.1",
-    "@nguniversal/express-engine": "14.0.0",
     "@sentry/angular": "7.15.0",
     "@sentry/tracing": "7.15.0",
     "@types/quill": "1.3.10",
@@ -50,7 +45,6 @@
     "@angular-eslint/template-parser": "14.1.2",
     "@angular/cli": "14.0.1",
     "@angular/compiler-cli": "14.0.1",
-    "@nguniversal/builders": "14.0.0",
     "@types/express": "4.17.0",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "5.27.1",
