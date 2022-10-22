@@ -1,11 +1,11 @@
 <div class="flex">
   <div class="flex-1">
     <img src="/assets/logo.svg" alt="logo" width="212" height="59" />
-    <h2 class="text-white font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl mt-12 mb-10" (click)="test()">
+    <h2 class="text-white font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl mt-12 mb-10">
       Créez gratuitement votre calendrier de l'avent
     </h2>
     <div class="flex flex-wrap">
-      <app-social-button class="lg:mr-5 mb-3 2xl:mb-0" theme="blue" img="/assets/google.svg" (click)="test()">
+      <app-social-button class="lg:mr-5 mb-3 2xl:mb-0" theme="blue" img="/assets/google.svg" (click)="login()" [disabled]="loading">
         <app-spinner *ngIf="loading"></app-spinner>
         <ng-container *ngIf="!loading">Connexion avec Google</ng-container>
       </app-social-button>

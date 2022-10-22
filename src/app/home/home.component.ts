@@ -12,8 +12,8 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
-  loading = true;
+export class HomeComponent {
+  loading = false;
 
   constructor(
     private auth: Auth,
@@ -22,21 +22,10 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private meta: Meta
   ) {
-    console.log('Constructor');
     this.meta.updateTag({
       name: 'description',
       content:
         "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
-    });
-  }
-
-  ngOnInit() {
-    console.log('OnInit');
-    user(this.auth).subscribe((user) => {
-      this.loading = false;
-      if (user) {
-        this.router.navigate(['calendars']);
-      }
     });
   }
 
@@ -57,10 +46,6 @@ export class HomeComponent implements OnInit {
       return true;
     }
     return ['auth/popup-closed-by-user', 'auth/cancelled-popup-request'].includes(e.code);
-  }
-
-  test() {
-    console.log('click sur test');
   }
 
   async login() {

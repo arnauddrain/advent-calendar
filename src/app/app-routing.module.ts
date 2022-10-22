@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarsComponent } from './calendars/calendars.component';
@@ -8,11 +9,16 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 
+const redirectLoggedInToCalendars = () => redirectLoggedInTo(['calendars']);
+const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard], data: { authGuardPipe: redirectLoggedInToCalendars } },
   {
     path: 'calendars',
-    component: CalendarsComponent
+    component: CalendarsComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToHome }
   },
   {
     path: 'privacy',
@@ -20,7 +26,9 @@ const routes: Routes = [
   },
   {
     path: 'edit/:uid',
-    component: EditCalendarComponent
+    component: EditCalendarComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToHome }
   },
   { path: 'preview', component: CalendarComponent },
   { path: ':uid', component: CalendarComponent },
@@ -30,8 +38,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})
+      initialNavigation: 'enabledBlocking'
+    })
   ],
   exports: [RouterModule]
 })
