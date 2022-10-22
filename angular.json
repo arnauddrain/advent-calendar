@@ -151,7 +151,78 @@
               "optimization": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "production",
+          "server": {
+            "builder": "@angular-devkit/build-angular:server",
+            "options": {
+              "outputPath": "dist/calendar/server",
+              "main": "server.ts",
+              "tsConfig": "tsconfig.server.json"
+            },
+            "configurations": {
+              "production": {
+                "outputHashing": "none",
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.prod.ts"
+                  }
+                ],
+                "optimization": true,
+                "sourceMap": true,
+                "extractLicenses": true
+              },
+              "preview": {
+                "outputHashing": "none",
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.preview.ts"
+                  }
+                ],
+                "optimization": true,
+                "sourceMap": true,
+                "extractLicenses": true
+              },
+              "development": {
+                "optimization": true
+              }
+            },
+            "defaultConfiguration": "production"
+          },
+          "serve-ssr": {
+            "builder": "@nguniversal/builders:ssr-dev-server",
+            "configurations": {
+              "development": {
+                "browserTarget": "calendar:build:development",
+                "serverTarget": "calendar:server:development"
+              },
+              "production": {
+                "browserTarget": "calendar:build:production",
+                "serverTarget": "calendar:server:production"
+              }
+            },
+            "defaultConfiguration": "development"
+          },
+          "prerender": {
+            "builder": "@nguniversal/builders:prerender",
+            "options": {
+              "routes": [
+                "/"
+              ]
+            },
+            "configurations": {
+              "production": {
+                "browserTarget": "calendar:build:production",
+                "serverTarget": "calendar:server:production"
+              },
+              "development": {
+                "browserTarget": "calendar:build:development",
+                "serverTarget": "calendar:server:development"
+              }
+            },
+            "defaultConfiguration": "production"
+          }
         }
       }
     }

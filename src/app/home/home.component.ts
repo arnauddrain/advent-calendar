@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Auth, user, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
@@ -12,7 +12,7 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   loading = true;
 
   constructor(
@@ -22,11 +22,16 @@ export class HomeComponent {
     private router: Router,
     private meta: Meta
   ) {
+    console.log('Constructor');
     this.meta.updateTag({
       name: 'description',
       content:
         "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
     });
+  }
+
+  ngOnInit() {
+    console.log('OnInit');
     user(this.auth).subscribe((user) => {
       this.loading = false;
       if (user) {
@@ -52,6 +57,10 @@ export class HomeComponent {
       return true;
     }
     return ['auth/popup-closed-by-user', 'auth/cancelled-popup-request'].includes(e.code);
+  }
+
+  test() {
+    console.log('click sur test');
   }
 
   async login() {
