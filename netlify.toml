@@ -3,7 +3,7 @@
   command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && ng build --configuration production && ng run calendar:serverless:production"
 
 [context.deploy-preview]
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && ng build --configuration preview && ng run calendar:serverless:preview"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && ng build --configuration preview && ng run calendar:serverless:production"
 
 [context.deploy-preview.environment]
   SENTRY_ENVIRONMENT = "preview"
