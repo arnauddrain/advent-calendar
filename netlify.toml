@@ -1,36 +1,12 @@
 [build]
-  base = "/"
   publish = "dist/calendar/browser"
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && npm run prerender"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && ng build:production && ng run calendar:serverless:production"
 
 [context.deploy-preview]
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && npm run prerender -- --configuration=preview"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && ng build:preview && ng run calendar:serverless:preview"
 
 [context.deploy-preview.environment]
   SENTRY_ENVIRONMENT = "preview"
 
-[[redirects]]
-  from = "https://ecalendrier.pvsc.fr/*"
-  to = "https://www.ecalendrier.net/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/calendars"
-  to = "/calendars"
-  status = 200
-
-[[redirects]]
-  from = "/privacy"
-  to = "/privacy"
-  status = 200
-
-[[redirects]]
-  from = "/edit/*"
-  to = "/calendars"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/preview"
-  status = 200
+[[plugins]]
+  package = "@netlify/plugin-angular-universal"
