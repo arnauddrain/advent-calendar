@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Auth, user, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
@@ -13,7 +13,7 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-  loading = true;
+  loading = false;
 
   constructor(
     private auth: Auth,
@@ -26,12 +26,6 @@ export class HomeComponent {
       name: 'description',
       content:
         "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
-    });
-    user(this.auth).subscribe((user) => {
-      this.loading = false;
-      if (user) {
-        this.router.navigate(['calendars']);
-      }
     });
   }
 

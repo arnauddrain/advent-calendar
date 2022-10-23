@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { Firestore, doc, docData } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { DocumentReference } from 'rxfire/firestore/interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { Meta } from '@angular/platform-browser';
+import { makeStateKey, Meta, TransferState } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Calendar } from '../calendar';
 
 import { DayDialogComponent } from '../day-dialog/day-dialog.component';
+import { waitFor } from '../libs/wait-for';
+
+const STATE_KEY_DEMO = makeStateKey<boolean>('demo');
+const STATE_KEY_UID = makeStateKey<string>('uid');
+const STATE_KEY_LOADING = makeStateKey<boolean>('loading');
+const STATE_KEY_CALENDAR = makeStateKey<Calendar>('calendar');
 
 @Component({
   selector: 'app-calendar',
@@ -15,24 +21,46 @@ import { DayDialogComponent } from '../day-dialog/day-dialog.component';
 })
 export class CalendarComponent {
   loading = true;
-  calendar: Calendar | null = null;
+  calendar?: Calendar;
   uid?: string;
   demo = false;
+  test = false;
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog, private afs: Firestore, private meta: Meta) {
+  constructor(
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private afs: Firestore,
+    private meta: Meta,
+    private state: TransferState
+  ) {
+    this.retrieveState();
     this.meta.updateTag({ name: 'description', content: "Calendrier de l'avent en ligne" });
-    this.route.paramMap.subscribe((paramMap) => {
+
+    this.route.paramMap.subscribe(async (paramMap) => {
       const uid = paramMap.get('uid');
-      if (uid) {
+      if (uid && uid !== this.calendar?.key) {
         this.uid = uid;
         const calendarDoc = doc(this.afs, 'calendars/' + this.uid);
-        docData<Calendar>(calendarDoc as DocumentReference<Calendar>).subscribe((val) => {
-          this.loading = false;
-          this.calendar = val;
-          this.demo = val?.demo ?? false;
-        });
+        this.calendar = (await waitFor(getDoc<Calendar>(calendarDoc as DocumentReference<Calendar>))).data();
+        this.loading = false;
+        this.demo = this.calendar?.demo ?? false;
+        this.setState();
       }
     });
+  }
+
+  private retrieveState() {
+    this.demo = this.state.get(STATE_KEY_DEMO, this.demo);
+    this.uid = this.state.get(STATE_KEY_UID, this.uid);
+    this.loading = this.state.get(STATE_KEY_LOADING, this.loading);
+    this.calendar = this.state.get(STATE_KEY_CALENDAR, this.calendar);
+  }
+
+  private setState() {
+    this.state.set(STATE_KEY_DEMO, this.demo);
+    this.state.set(STATE_KEY_UID, this.uid);
+    this.state.set(STATE_KEY_LOADING, this.loading);
+    this.state.set(STATE_KEY_CALENDAR, this.calendar);
   }
 
   open(index: number) {

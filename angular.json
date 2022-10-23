@@ -5,11 +5,7 @@
   "projects": {
     "calendar": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -22,38 +18,31 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.css"],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "none",
-              "sourceMap": true,
-              "namedChunks": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "4mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
-              ]
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
             },
             "preview": {
               "fileReplacements": [
@@ -62,49 +51,33 @@
                   "with": "src/environments/environment.preview.ts"
                 }
               ],
-              "optimization": true,
-              "outputHashing": "none",
-              "sourceMap": true,
-              "namedChunks": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "4mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ]
+              "outputHashing": "all"
             },
             "development": {
-              "optimization": {
-                "scripts": false,
-                "styles": false,
-                "fonts": false
-              }
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "calendar:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "calendar:build:production"
             },
             "preview": {
               "browserTarget": "calendar:build:preview"
+            },
+            "development": {
+              "browserTarget": "calendar:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -117,10 +90,6 @@
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {}
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
@@ -137,10 +106,7 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ],
-              "optimization": true,
-              "sourceMap": true,
-              "extractLicenses": true
+              ]
             },
             "preview": {
               "outputHashing": "media",
@@ -149,13 +115,12 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.preview.ts"
                 }
-              ],
-              "optimization": true,
-              "sourceMap": true,
-              "extractLicenses": true
+              ]
             },
             "development": {
-              "optimization": true
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
             }
           },
           "defaultConfiguration": "production"
@@ -170,10 +135,6 @@
             "production": {
               "browserTarget": "calendar:build:production",
               "serverTarget": "calendar:server:production"
-            },
-            "preview": {
-              "browserTarget": "calendar:build:preview",
-              "serverTarget": "calendar:server:preview"
             }
           },
           "defaultConfiguration": "development"
@@ -188,10 +149,6 @@
               "browserTarget": "calendar:build:production",
               "serverTarget": "calendar:server:production"
             },
-            "preview": {
-              "browserTarget": "calendar:build:preview",
-              "serverTarget": "calendar:server:preview"
-            },
             "development": {
               "browserTarget": "calendar:build:development",
               "serverTarget": "calendar:server:development"
@@ -202,8 +159,5 @@
       }
     }
   },
-  "defaultProject": "calendar",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
-  }
+  "defaultProject": "calendar"
 }
