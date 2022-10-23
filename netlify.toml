@@ -7,6 +7,3 @@
 
 [context.deploy-preview.environment]
   SENTRY_ENVIRONMENT = "preview"
-
-[[plugins]]
-  package = "@netlify/plugin-angular-universal"
