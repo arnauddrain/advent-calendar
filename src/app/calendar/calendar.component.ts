@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { DocumentReference } from 'rxfire/firestore/interfaces';
 import { MatDialog } from '@angular/material/dialog';
-import { makeStateKey, Meta, TransferState } from '@angular/platform-browser';
+import { makeStateKey, Meta, Title, TransferState } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Calendar } from '../calendar';
 
@@ -31,6 +31,7 @@ export class CalendarComponent {
     private dialog: MatDialog,
     private afs: Firestore,
     private meta: Meta,
+    private title: Title,
     private state: TransferState
   ) {
     this.retrieveState();
@@ -45,6 +46,8 @@ export class CalendarComponent {
         this.loading = false;
         this.demo = this.calendar?.demo ?? false;
         this.setState();
+        this.title.setTitle(this.calendar?.name + " - Calendrier de l'avent");
+        this.meta.updateTag({ name: 'description', content: "Calendrier de l'avent en ligne - " + this.calendar?.name });
       }
     });
   }
