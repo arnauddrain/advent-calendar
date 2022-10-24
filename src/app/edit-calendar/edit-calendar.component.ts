@@ -82,10 +82,10 @@ export class EditCalendarComponent implements OnInit {
       .subscribe((data) => {
         logEvent(this.analytics, 'Save settings');
         if (data?.startDate) {
-          updateDoc(doc(this.afs, 'calendars/' + this.uid), { startDate: data.startDate.toISOString() });
+          updateDoc(doc(this.afs, 'calendars/' + this.uid), { startDate: data.startDate });
         }
         if (data?.endDate) {
-          updateDoc(doc(this.afs, 'calendars/' + this.uid), { endDate: data.endDate.toISOString() });
+          updateDoc(doc(this.afs, 'calendars/' + this.uid), { endDate: data.endDate });
         }
         if (data?.name) {
           updateDoc(doc(this.afs, 'calendars/' + this.uid), { name: data.name });

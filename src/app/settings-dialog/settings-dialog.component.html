@@ -1,22 +1,40 @@
-<mat-dialog-content>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Nom</mat-label>
-      <input matInput type="text" [(ngModel)]="name" />
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Dates</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
-        <input matInput matStartDate [(ngModel)]="startDate" placeholder="Début" />
-        <input matInput matEndDate [(ngModel)]="endDate" placeholder="Fin" />
-      </mat-date-range-input>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <app-button theme="success" (click)="save()">Enregistrer</app-button>
-</mat-dialog-actions>
+<form (submit)="save()" class="p-4">
+  <mat-dialog-content>
+    <h2 class="text-3xl pb-8 font-bold">Paramètres du calendrier</h2>
+    <label for="name">
+      <h3 class="text-lg pb-3 font-bold">Nom du calendrier</h3>
+      <input
+        required
+        id="name"
+        [(ngModel)]="name"
+        name="name"
+        class="rounded bg-none border-solid border-gray-400 border px-4 py-2 outline-none w-full"
+        placeholder="Nom"
+      />
+    </label>
+    <label for="dates">
+      <h3 class="text-lg pb-3 pt-3 font-bold">Dates du calendrier</h3>
+      <div class="gap-1 flex items-center md:flex-row flex-col">
+        Du
+        <input
+          type="date"
+          id="startDate"
+          name="startDate"
+          class="rounded bg-none border-solid border-gray-400 border px-4 py-2 outline-none w-full"
+          [(ngModel)]="startDate"
+        />
+        au
+        <input
+          type="date"
+          id="endDate"
+          name="endDate"
+          class="rounded bg-none border-solid border-gray-400 border px-4 py-2 outline-none w-full"
+          [(ngModel)]="endDate"
+        />
+      </div>
+    </label>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <app-button type="submit" theme="success" class="pt-2">Enregistrer</app-button>
+  </mat-dialog-actions>
+</form>

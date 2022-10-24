@@ -7,17 +7,17 @@ import { Calendar } from '../calendar';
   templateUrl: './settings-dialog.component.html'
 })
 export class SettingsDialogComponent {
-  startDate: Date | null = null;
-  endDate: Date | null = null;
+  startDate = '';
+  endDate = '';
   name: string;
 
   constructor(public dialogRef: MatDialogRef<SettingsDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: { calendar: Calendar }) {
     this.name = data.calendar.name;
     if (data.calendar.startDate) {
-      this.startDate = new Date(data.calendar.startDate);
+      this.startDate = data.calendar.startDate.substring(0, 10);
     }
     if (data.calendar.endDate) {
-      this.endDate = new Date(data.calendar.endDate);
+      this.endDate = data.calendar.endDate.substring(0, 10);
     }
   }
 

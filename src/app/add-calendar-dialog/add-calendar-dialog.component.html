@@ -1,12 +1,51 @@
-<form (submit)="saveCalendar()">
+<form (submit)="saveCalendar()" class="p-4">
   <mat-dialog-content>
-    <h2 class="text-xl">Créer un nouveau calendrier</h2>
-    <h3 class="text-lg">Nom du calendrier</h3>
-    <input required [(ngModel)]="name" name="name" class="rounded bg-none border-solid border-black border px-4 py-2 outline-none" />
+    <h2 class="text-3xl pb-8 font-bold">Créer un nouveau calendrier</h2>
+    <label for="name">
+      <h3 class="text-lg pb-3 font-bold">Nom du calendrier</h3>
+      <input
+        required
+        id="name"
+        [(ngModel)]="name"
+        name="name"
+        class="rounded bg-none border-solid border-gray-400 border px-4 py-2 outline-none w-full"
+        placeholder="Nom"
+      />
+    </label>
+    <label for="dates">
+      <h3 class="text-lg pb-3 pt-3 font-bold">Dates du calendrier</h3>
+      <select
+        class="rounded bg-none border-solid border-gray-400 border px-4 py-2 outline-none w-full text-center"
+        id="dates"
+        name="dates"
+        [(ngModel)]="dates"
+      >
+        <option value="christmas">Noël 2022</option>
+        <option value="custom">Personnalisées</option>
+      </select>
+    </label>
+    <label *ngIf="dates === 'custom'" class="pb-3 pt-3 gap-1 flex items-center md:flex-row flex-col">
+      Du
+      <input
+        type="date"
+        id="startDate"
+        name="startDate"
+        class="rounded bg-none border-solid border-gray-400 border px-4 py-2 outline-none w-full"
+        [(ngModel)]="startDate"
+      />
+      au
+      <input
+        type="date"
+        id="endDate"
+        name="endDate"
+        class="rounded bg-none border-solid border-gray-400 border px-4 py-2 outline-none w-full"
+        [(ngModel)]="endDate"
+      />
+    </label>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <app-button type="submit" theme="success">
-      <ng-container *ngIf="!savingCalendar">Sauvegarder</ng-container>
+    <app-button type="submit" theme="success" class="pt-2">
+      <ng-container *ngIf="!savingCalendar">Créer</ng-container>
       <ng-container *ngIf="savingCalendar"><app-spinner></app-spinner></ng-container>
     </app-button>
   </mat-dialog-actions>
