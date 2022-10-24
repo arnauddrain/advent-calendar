@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { Analytics, logEvent } from '@angular/fire/analytics';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, serverTimestamp } from '@angular/fire/firestore';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -32,7 +32,7 @@ export class AddCalendarDialogComponent {
       const calendarData = {
         name: this.name,
         author: this.user.uid,
-        createdAt: Date.now(),
+        createdAt: serverTimestamp(),
         startDate: this.dates === 'christmas' ? '2022-12-01' : this.startDate,
         endDate: this.dates === 'christmas' ? '2022-12-25' : this.endDate
       };
