@@ -6,7 +6,7 @@ import { Auth, user, User } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { DayEditDialogComponent } from '../day-edit-dialog/day-edit-dialog.component';
@@ -34,6 +34,7 @@ export class EditCalendarComponent implements OnInit {
     private analytics: Analytics,
     private afs: Firestore,
     private meta: Meta,
+    private title: Title,
     @Inject(PLATFORM_ID) platformId: string
   ) {
     this.meta.updateTag({
@@ -41,6 +42,7 @@ export class EditCalendarComponent implements OnInit {
       content:
         "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
     });
+    this.title.setTitle("eCalendrier - Calendrier de l'avent en ligne");
     if (isPlatformBrowser(platformId)) {
       this.uid = this.route.snapshot.paramMap.get('uid') ?? '';
       user(this.auth).subscribe((user) => {
