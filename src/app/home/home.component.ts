@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Auth, user, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { signInWithRedirect } from '@firebase/auth';
 
@@ -20,13 +20,15 @@ export class HomeComponent {
     private bottomSheet: MatBottomSheet,
     private analytics: Analytics,
     private router: Router,
-    private meta: Meta
+    private meta: Meta,
+    private title: Title
   ) {
     this.meta.updateTag({
       name: 'description',
       content:
         "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
     });
+    this.title.setTitle("eCalendrier - Calendrier de l'avent en ligne");
   }
 
   async loginViaRedirect(provider: typeof GoogleAuthProvider | typeof FacebookAuthProvider) {
