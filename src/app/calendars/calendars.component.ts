@@ -2,7 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { Auth, signOut, user, User } from '@angular/fire/auth';
 import { Analytics, logEvent } from '@angular/fire/analytics';
-import { Firestore, collection, collectionData, query, where, Query } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, query, where, Query, orderBy } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -51,7 +51,8 @@ export class CalendarsComponent {
   private subscribeToCalendars() {
     const calendarQuery = query<Calendar>(
       collection(this.afs, '/calendars') as Query<Calendar>,
-      where('author', '==', this.user?.uid ?? '')
+      where('author', '==', this.user?.uid ?? ''),
+      orderBy('createdAt')
     );
     this.calendars = collectionData<Calendar>(calendarQuery, { idField: 'key' }).pipe(tap(() => (this.loading = false)));
   }
