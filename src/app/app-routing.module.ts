@@ -13,7 +13,7 @@ const redirectLoggedInToCalendars = () => redirectLoggedInTo(['calendars']);
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard], data: { authGuardPipe: redirectLoggedInToCalendars } },
+  { path: '', component: HomeComponent },
   {
     path: 'calendars',
     component: CalendarsComponent,

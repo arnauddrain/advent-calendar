@@ -29,6 +29,12 @@ export class HomeComponent {
         "Créez votre propre calendrier de l'avent en ligne personnalisé pour les fêtes de noël simplement, gratuitement et sans pubs !"
     });
     this.title.setTitle("eCalendrier - Calendrier de l'avent en ligne");
+    user(this.auth).subscribe((user) => {
+      this.loading = false;
+      if (user) {
+        this.router.navigate(['calendars']);
+      }
+    });
   }
 
   async loginViaRedirect(provider: typeof GoogleAuthProvider | typeof FacebookAuthProvider) {
