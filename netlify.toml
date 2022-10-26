@@ -10,3 +10,7 @@
 
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
