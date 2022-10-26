@@ -14,6 +14,7 @@ const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: '/', component: HomeComponent },
   {
     path: 'calendars',
     component: CalendarsComponent,
