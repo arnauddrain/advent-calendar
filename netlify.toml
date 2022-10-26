@@ -10,9 +10,3 @@
 
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
-
-[[redirects]]
-  from = "/"
-  to = "/home"
-  status = 200
-  force = true
