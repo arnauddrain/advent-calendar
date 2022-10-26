@@ -1,9 +1,9 @@
 [build]
   publish = "dist/calendar/browser"
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && rm dist/calendar/browser/index.html && ng build --configuration production && ng run calendar:serverless:production"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && ng build --configuration production && rm dist/calendar/browser/index.html && ng run calendar:serverless:production"
 
 [context.deploy-preview]
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && ng build --configuration preview && ng run calendar:serverless:production"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && ng build --configuration preview && rm dist/calendar/browser/index.html && ng run calendar:serverless:production"
 
 [context.deploy-preview.environment]
   SENTRY_ENVIRONMENT = "preview"
