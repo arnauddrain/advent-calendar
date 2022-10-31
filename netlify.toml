@@ -10,3 +10,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-angular-universal"
+
+[[redirects]]
+  from = "/"
+  to = "/.netlify/functions/angular-builder"
+  force = true
+  status = 200
