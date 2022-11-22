@@ -6,10 +6,8 @@
       {{ calendar.name }}
     </div>
     <div class="flex">
-      <app-button matTooltip="Partager" (click)="share()" [cdkCopyToClipboard]="url">
-        Partager avec les jours cachés : <mat-icon>link</mat-icon>
-      </app-button>
-      <app-button matTooltip="Options" (click)="settings()">
+      <app-button theme="success" matTooltip="Partager" (click)="share()">Partager<mat-icon class="ml-2">share</mat-icon> </app-button>
+      <app-button theme="dark" matTooltip="Options" (click)="settings()" class="ml-2">
         <mat-icon>settings</mat-icon>
       </app-button>
     </div>

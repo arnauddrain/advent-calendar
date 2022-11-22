@@ -39,6 +39,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ButtonComponent } from './shared/button/button.component';
 import { AddCalendarDialogComponent } from './add-calendar-dialog/add-calendar-dialog.component';
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SocialButtonComponent } from './shared/social-button/social-button.component';
@@ -61,6 +62,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     NotFoundComponent,
     ButtonComponent,
     AddCalendarDialogComponent,
+    ShareDialogComponent,
     SpinnerComponent,
     TopBarComponent,
     SocialButtonComponent,

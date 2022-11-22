@@ -14,6 +14,7 @@ import { DeleteCalendarDialogComponent } from '../delete-calendar-dialog/delete-
 import { SettingsDialogComponent } from '../settings-dialog/settings-dialog.component';
 import { isPlatformBrowser } from '@angular/common';
 import { Calendar } from '../calendar';
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 @Component({
   selector: 'app-edit-calendar',
@@ -66,10 +67,6 @@ export class EditCalendarComponent implements OnInit {
     logEvent(this.analytics, 'Edit calendar');
   }
 
-  get url(): string {
-    return window.location.origin + '/' + this.uid;
-  }
-
   async settings() {
     logEvent(this.analytics, 'Open settings');
     this.dialog
@@ -106,11 +103,10 @@ export class EditCalendarComponent implements OnInit {
   }
 
   share() {
-    logEvent(this.analytics, 'Share');
-    this.bottomSheet.open(BottomSheetComponent, {
+    logEvent(this.analytics, 'Open Share');
+    this.dialog.open(ShareDialogComponent, {
       data: {
-        text: 'Le lien a été copié dans le presse-papier !',
-        link: this.url
+        uid: this.uid
       }
     });
   }
