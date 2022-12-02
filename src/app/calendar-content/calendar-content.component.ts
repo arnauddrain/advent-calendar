@@ -24,8 +24,8 @@ export class CalendarContentComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (this.calendar) {
-      this.startDate = new Date(this.calendar.startDate ? this.calendar.startDate : '2020-12-01T00:00:00');
-      this.endDate = new Date(this.calendar.endDate ? this.calendar.endDate : '2020-12-25T00:00:00');
+      this.startDate = new Date(this.calendar.startDate ? this.calendar.startDate + 'T00:00:00' : '2020-12-01T00:00:00');
+      this.endDate = new Date(this.calendar.endDate ? this.calendar.endDate + 'T00:00:00' : '2020-12-25T00:00:00');
     }
     if (this.demo) {
       this.startDate = new Date();
