@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Analytics, logEvent } from '@angular/fire/analytics';
 import { Auth, user, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from '@angular/fire/auth';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';

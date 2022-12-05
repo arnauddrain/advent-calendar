@@ -24,6 +24,7 @@ import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/mate
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MeComponent } from './me/me.component';
 import { environment } from '../environments/environment';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -49,6 +50,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
 @NgModule({
   declarations: [
     AppComponent,
+    MeComponent,
     CalendarsComponent,
     CalendarComponent,
     EditCalendarComponent,

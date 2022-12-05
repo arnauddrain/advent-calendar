@@ -8,12 +8,17 @@ import { EditCalendarComponent } from './edit-calendar/edit-calendar.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { MeComponent } from './me/me.component';
 
 const redirectLoggedInToCalendars = () => redirectLoggedInTo(['calendars']);
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  {
+    path: 'me',
+    component: MeComponent
+  },
   {
     path: 'calendars',
     component: CalendarsComponent,
