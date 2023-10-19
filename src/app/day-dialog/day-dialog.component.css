@@ -1,3 +1,4 @@
 :host ::ng-deep img {
   max-width: 100% !important;
+  max-height: 75vh;
 }
