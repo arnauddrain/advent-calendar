@@ -1,18 +1,14 @@
 [build]
   publish = "dist/calendar/browser"
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && ng build --configuration production && ng run calendar:serverless:production"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.prod.ts && ng build --configuration production"
 
 [context.deploy-preview]
-  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && ng build --configuration preview && ng run calendar:serverless:production"
+  command = "sed -i 's/SENTRY_RELEASE/'$COMMIT_REF'/g' src/environments/environment.preview.ts && ng build --configuration preview"
 
 [context.deploy-preview.environment]
   SENTRY_ENVIRONMENT = "preview"
 
-[[plugins]]
-  package = "@netlify/plugin-angular-universal"
-
 [[redirects]]
-  from = "/"
-  to = "/.netlify/functions/angular-builder"
-  force = true
+  from = "/*"
+  to = "/index.html"
   status = 200
