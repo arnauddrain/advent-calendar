@@ -7,3 +7,8 @@
 
 [context.deploy-preview.environment]
   SENTRY_ENVIRONMENT = "preview"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
