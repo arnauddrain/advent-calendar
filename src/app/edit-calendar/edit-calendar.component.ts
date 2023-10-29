@@ -22,7 +22,7 @@ import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
   styleUrls: ['./edit-calendar.component.css']
 })
 export class EditCalendarComponent implements OnInit {
-  calendar: Calendar | null = null;
+  calendar?: Calendar;
   uid: string = '';
   user: User | null = null;
 
