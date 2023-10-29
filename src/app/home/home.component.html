@@ -9,10 +9,6 @@
         <app-spinner *ngIf="loading"></app-spinner>
         <ng-container *ngIf="!loading">Connexion avec Google</ng-container>
       </app-social-button>
-      <app-social-button img="/assets/facebook.svg" (click)="fbLogin()" [disabled]="loading">
-        <app-spinner *ngIf="loading" color="black"></app-spinner>
-        <ng-container *ngIf="!loading">Connexion avec Facebook</ng-container>
-      </app-social-button>
     </div>
     <div class="w-20 h-0.5 bg-black my-7"></div>
     <a [routerLink]="['/-MMm0AnXznQF1ZTaetrC']"
