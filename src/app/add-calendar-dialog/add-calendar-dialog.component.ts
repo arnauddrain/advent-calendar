@@ -33,8 +33,8 @@ export class AddCalendarDialogComponent {
         name: this.name,
         author: this.user.uid,
         createdAt: serverTimestamp(),
-        startDate: this.dates === 'christmas' ? '2023-12-01' : this.startDate,
-        endDate: this.dates === 'christmas' ? '2023-12-25' : this.endDate
+        startDate: this.dates === 'christmas' ? '2024-12-01' : this.startDate,
+        endDate: this.dates === 'christmas' ? '2024-12-25' : this.endDate
       };
 
       const calendarCollection = collection(this.afs, '/calendars');
