@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  stripeLink: 'https://buy.stripe.com/test_fZe5nC2uA42yazufYY',
   firebase: {
     apiKey: 'AIzaSyCPH5aQv8cD5z80VVmq5NOTBDKrUiUbnss',
     authDomain: 'advent-calendar-dev.firebaseapp.com',

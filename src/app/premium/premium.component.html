@@ -6,13 +6,21 @@
     <ul class="list-disc list-inside">
       <li>Désactiver le logo "eCalendrier" sur vos calendriers</li>
       <li>Désactiver le bouton "Créer mon propre calendrier" sur vos calendriers</li>
-      <li>Retirer la limite de 1Mo par case</li>
+      <li>Retirer la limite de 2Mo par case</li>
     </ul>
+    <p>Acheter le mode premium permet aussi de soutenir le développement de l'application pour qu'il puisse perdurer dans le temps.</p>
     <p>Le paiement s'effectue de façon sécurisée en ligne grâce à la plateforme Stripe.</p>
     <div class="flex justify-center mt-4">
-      <button class="bg-yellow-400 text-black rounded py-2 px-4 lg:py-4 flex items-center gap-2">
+      <a
+        [href]="stripeLink + '?client_reference_id=' + user?.uid"
+        class="bg-yellow-400 text-black rounded py-2 px-4 lg:py-4 flex items-center gap-2"
+        *ngIf="!premium"
+      >
         <mat-icon>star</mat-icon>Activer le mode premium<mat-icon>star</mat-icon>
-      </button>
+      </a>
+      <a class="bg-emerald-500 text-black rounded py-2 px-4 lg:py-4 flex items-center gap-2" *ngIf="premium">
+        <mat-icon>star</mat-icon>Vous êtes premium, merci !<mat-icon>star</mat-icon>
+      </a>
     </div>
   </div>
   <div></div>

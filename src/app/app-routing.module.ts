@@ -27,12 +27,14 @@ const routes: Routes = [
     data: { authGuardPipe: redirectUnauthorizedToHome }
   },
   {
-    path: 'privacy',
-    component: PrivacyComponent
+    path: 'premium',
+    component: PremiumComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToHome }
   },
   {
-    path: 'premium',
-    component: PremiumComponent
+    path: 'privacy',
+    component: PrivacyComponent
   },
   {
     path: 'edit/:uid',

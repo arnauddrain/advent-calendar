@@ -5,4 +5,6 @@ export interface Calendar {
   startDate?: string;
   endDate?: string;
   demo?: boolean;
+  displayLogo?: boolean;
+  displayCta?: boolean;
 }

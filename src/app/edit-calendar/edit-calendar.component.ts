@@ -87,6 +87,9 @@ export class EditCalendarComponent implements OnInit {
         if (data?.name) {
           updateDoc(doc(this.afs, 'calendars/' + this.uid), { name: data.name });
         }
+        if (data?.displayLogo !== undefined || data?.displayCta !== undefined) {
+          updateDoc(doc(this.afs, 'calendars/' + this.uid), { displayLogo: data.displayLogo, displayCta: data.displayCta });
+        }
       });
   }
 
