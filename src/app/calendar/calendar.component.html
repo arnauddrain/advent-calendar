@@ -1,7 +1,10 @@
-<div class="mb-14 flex justify-between items-center flex-col md:flex-row">
-  <a [routerLink]="'/'"><img src="/assets/logo.svg" alt="logo" width="212" height="59" /></a>
+<div
+  class="mb-14 flex justify-between items-center flex-col md:flex-row"
+  *ngIf="calendar?.displayLogo !== false || calendar?.displayCta !== false"
+>
+  <a [routerLink]="'/'"><img src="/assets/logo.svg" alt="logo" width="212" height="59" *ngIf="calendar?.displayLogo !== false" /></a>
   <div class="flex items-center text-white mt-4 d:mt-0 text-center">
-    <a [routerLink]="['/']"><app-button theme="dark">Créer mon propre calendrier</app-button></a>
+    <a [routerLink]="['/']" *ngIf="calendar?.displayCta !== false"><app-button theme="dark">Créer mon propre calendrier</app-button></a>
   </div>
 </div>
 

@@ -46,6 +46,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { SocialButtonComponent } from './shared/social-button/social-button.component';
 import { BypassPipe } from './shared/bypass.pipe';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { PremiumComponent } from './premium/premium.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
     TopBarComponent,
     SocialButtonComponent,
     PrivacyComponent,
-    BypassPipe
+    BypassPipe,
+    PremiumComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

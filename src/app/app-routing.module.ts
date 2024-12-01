@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { MeComponent } from './me/me.component';
+import { PremiumComponent } from './premium/premium.component';
 
 const redirectLoggedInToCalendars = () => redirectLoggedInTo(['calendars']);
 const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(['']);
@@ -22,6 +23,12 @@ const routes: Routes = [
   {
     path: 'calendars',
     component: CalendarsComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToHome }
+  },
+  {
+    path: 'premium',
+    component: PremiumComponent,
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToHome }
   },

@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  stripeLink: 'https://buy.stripe.com/fZecPOgg69TAdpucMM',
   firebase: {
     apiKey: 'AIzaSyAsBtxr5-Yin0s-3wfhyStn4VESdGjQxOA',
     authDomain: 'auth.ecalendrier.net',
