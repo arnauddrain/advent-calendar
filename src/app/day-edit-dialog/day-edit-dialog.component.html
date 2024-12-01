@@ -11,6 +11,7 @@
   </p>
   <p class="mt-4 italic" *ngIf="!preview">Vous pouvez redimensionner les images avec leurs coins.</p>
   <p class="text-red mt-4" *ngIf="text && text.length >= 2000000 && !premium">
-    Chaque jour est limité à 2Mo de données, essayez de réduire la taille de vos images ou activez le mode premium.
+    Chaque jour est limité à 2Mo de données, essayez de réduire la taille de vos images ou activez le
+    <a [routerLink]="['/premium']" target="_blank" class="underline">mode premium</a>.
   </p>
 </mat-dialog-content>
