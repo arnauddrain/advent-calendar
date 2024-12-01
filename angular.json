@@ -159,5 +159,8 @@
       }
     }
   },
-  "defaultProject": "calendar"
+  "defaultProject": "calendar",
+  "cli": {
+    "analytics": false
+  }
 }
