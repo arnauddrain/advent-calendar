@@ -10,7 +10,7 @@
     </ul>
     <p>Acheter le mode premium permet aussi de soutenir le développement de l'application pour qu'il puisse perdurer dans le temps.</p>
     <p>Le paiement s'effectue de façon sécurisée en ligne grâce à la plateforme Stripe.</p>
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center my-4">
       <a
         [href]="stripeLink + '?client_reference_id=' + user?.uid"
         class="bg-yellow-400 text-black rounded py-2 px-4 lg:py-4 flex items-center gap-2"
@@ -21,6 +21,10 @@
       <a class="bg-emerald-500 text-black rounded py-2 px-4 lg:py-4 flex items-center gap-2" *ngIf="premium">
         <mat-icon>star</mat-icon>Vous êtes premium, merci !<mat-icon>star</mat-icon>
       </a>
+    </div>
+    <div class="italic" *ngIf="!premium">
+      Les fonctionnalités premium peuvent mettre jusqu'à 5 minutes à apparaître après votre paiement.<br />
+      Le bouton ci-dessus changera de couleur quand le mode sera actif.
     </div>
   </div>
   <div></div>
