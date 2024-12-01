@@ -41,6 +41,7 @@
       <h3 class="text-lg pb-3 pt-3 font-bold">Bouton "Créer mon propre calendrier"</h3>
       <mat-slide-toggle name="displayCta" [(ngModel)]="displayCta"></mat-slide-toggle>
     </label>
+    <i *ngIf="!premium">En activant le mode premium, vous pouvez aussi cacher le logo du site et le bouton "Créer mon propre calendrier"</i>
   </mat-dialog-content>
   <mat-dialog-actions>
     <app-button type="submit" theme="success" class="pt-2">Enregistrer</app-button>
