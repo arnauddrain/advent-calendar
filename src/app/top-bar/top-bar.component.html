@@ -14,7 +14,7 @@
     <a href="https://www.facebook.com/messages/t/108201144469459" target="_blank">
       <app-button class="mr-2" (click)="contactEvent()"> Contacter <mat-icon class="ml-1">email</mat-icon></app-button>
     </a>
-    <a [routerLink]="['/premium']" class="bg-red rounded py-2 px-4 lg:py-4 flex items-center gap-2">
+    <a [routerLink]="['/premium']" (click)="premiumEvent()" class="bg-red rounded py-2 px-4 lg:py-4 flex items-center gap-2">
       <mat-icon>star</mat-icon>
       Mode premium
     </a>

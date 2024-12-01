@@ -8,6 +8,10 @@ import { Analytics, logEvent } from '@angular/fire/analytics';
 export class TopBarComponent {
   constructor(private analytics: Analytics) {}
 
+  premiumEvent() {
+    logEvent(this.analytics, 'Click on premium');
+  }
+
   donationEvent() {
     logEvent(this.analytics, 'Click on donation');
   }
