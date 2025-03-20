@@ -13,8 +13,8 @@ export class AddCalendarDialogComponent {
   user: User;
   savingCalendar = false;
   dates = 'christmas';
-  startDate = '2022-12-01';
-  endDate = '2022-12-25';
+  startDate = '2025-12-01';
+  endDate = '2025-12-25';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { user: User },
@@ -33,8 +33,8 @@ export class AddCalendarDialogComponent {
         name: this.name,
         author: this.user.uid,
         createdAt: serverTimestamp(),
-        startDate: this.dates === 'christmas' ? '2024-12-01' : this.startDate,
-        endDate: this.dates === 'christmas' ? '2024-12-25' : this.endDate
+        startDate: this.dates === 'christmas' ? '2025-12-01' : this.startDate,
+        endDate: this.dates === 'christmas' ? '2025-12-25' : this.endDate
       };
 
       const calendarCollection = collection(this.afs, '/calendars');
